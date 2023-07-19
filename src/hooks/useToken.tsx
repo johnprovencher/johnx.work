@@ -25,13 +25,13 @@ const tokenQuery = (id: string) => `
   }`
 
 const useToken = (id: string) => {
-  const { loading, error, data } = useQuery(gql(tokenQuery(id)))
+    const { loading, error, data } = useQuery(gql(tokenQuery(id)))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useToken

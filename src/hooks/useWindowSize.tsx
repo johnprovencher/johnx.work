@@ -8,27 +8,27 @@ interface WindowSize {
 }
 
 function useWindowSize(): WindowSize {
-  const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: 0,
-    height: 0
-  })
-
-  const handleSize = () => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
+    const [windowSize, setWindowSize] = useState<WindowSize>({
+        width: 0,
+        height: 0
     })
-  }
 
-  useEventListener("resize", handleSize)
+    const handleSize = () => {
+        setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        })
+    }
 
-  // Set size at the first client-side load
-  useIsomorphicLayoutEffect(() => {
-    handleSize()
+    useEventListener("resize", handleSize)
+
+    // Set size at the first client-side load
+    useIsomorphicLayoutEffect(() => {
+        handleSize()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    }, [])
 
-  return windowSize
+    return windowSize
 }
 
 export default useWindowSize

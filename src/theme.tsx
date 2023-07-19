@@ -1,7 +1,7 @@
 import * as React from "react"
 import {
-  Link as RouterLink,
-  LinkProps as RouterLinkProps
+    Link as RouterLink,
+    LinkProps as RouterLinkProps
 } from "react-router-dom"
 import { createTheme, PaletteColor } from "@mui/material/styles"
 import { LinkProps } from "@mui/material/Link"
@@ -25,60 +25,60 @@ const LinkBehavior = React.forwardRef<
   any,
   Omit<RouterLinkProps, "to"> & { href: RouterLinkProps["to"] }
 >((props, ref) => {
-  const { href, ...other } = props
-  // Map href (MUI) -> to (react-router)
-  return <RouterLink ref={ref} to={href} {...other} />
+    const { href, ...other } = props
+    // Map href (MUI) -> to (react-router)
+    return <RouterLink ref={ref} to={href} {...other} />
 })
 
 const { palette } = createTheme()
 
 const theme = createTheme({
-  palette: {
-    background: {
-        default: "#000000"
+    palette: {
+        background: {
+            default: "#000000"
+        },
+        text: {
+            primary: "#FFFFFF"
+        },
+        primary: {
+            main: "#FFFFFF",
+            contrastText: "#ECF0F1"
+        },
+        secondary: {
+            main: "#FFFFFF",
+            contrastText: "#ECF0F1"
+        },
+        success: {
+            main: "#27AE60"
+        },
+        error: {
+            main: "#E74C3C"
+        },
+        upcoming: palette.augmentColor({
+            color: {
+                main: "#CE7A18"
+            }
+        })
     },
-    text: {
-        primary: "#FFFFFF"
+    typography: {
+        fontFamily: [
+            "Superstudio-Regular",
+            "Arial",
+            "sans-serif"
+        ].join(",")
     },
-    primary: {
-      main: "#FFFFFF",
-      contrastText: "#ECF0F1"
-    },
-    secondary: {
-      main: "#FFFFFF",
-      contrastText: "#ECF0F1"
-    },
-    success: {
-      main: "#27AE60"
-    },
-    error: {
-      main: "#E74C3C"
-    },
-    upcoming: palette.augmentColor({
-      color: {
-        main: "#CE7A18"
-      }
-    })
-  },
-  typography: {
-    fontFamily: [
-      "Superstudio-Regular",
-      "Arial",
-      "sans-serif"
-    ].join(",")
-  },
-  components: {
-    MuiLink: {
-      defaultProps: {
-        component: LinkBehavior
-      } as LinkProps
-    },
-    MuiButtonBase: {
-      defaultProps: {
-        LinkComponent: LinkBehavior
-      }
+    components: {
+        MuiLink: {
+            defaultProps: {
+                component: LinkBehavior
+            } as LinkProps
+        },
+        MuiButtonBase: {
+            defaultProps: {
+                LinkComponent: LinkBehavior
+            }
+        }
     }
-  }
 })
 
 // theme.typography.h1 = {

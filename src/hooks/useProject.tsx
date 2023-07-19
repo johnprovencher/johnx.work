@@ -47,13 +47,13 @@ const projectQuery = (id: string) => `
   }`
 
 const useProject = (id: string) => {
-  const { loading, error, data } = useQuery(gql(projectQuery(id)))
+    const { loading, error, data } = useQuery(gql(projectQuery(id)))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useProject

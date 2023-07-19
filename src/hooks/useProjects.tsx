@@ -53,16 +53,16 @@ const projectsQuery = ({ first, skip, orderDirection }: ProjectsQueryParams) => 
   }`
 
 const useProjects = (params?: ProjectsQueryParams) => {
-  const first = params?.first || PROJECTS_PER_PAGE
-  const skip = params?.skip || 0
-  const orderDirection = params?.orderDirection || OrderDirection.DESC
-  const { loading, error, data } = useQuery(gql(projectsQuery({ first, skip, orderDirection })))
+    const first = params?.first || PROJECTS_PER_PAGE
+    const skip = params?.skip || 0
+    const orderDirection = params?.orderDirection || OrderDirection.DESC
+    const { loading, error, data } = useQuery(gql(projectsQuery({ first, skip, orderDirection })))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useProjects

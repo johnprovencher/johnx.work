@@ -24,13 +24,13 @@ const countOwnedProjectsQuery = (walletAddress: string) => `
   }`
 
 const useCountOwnedProjects = (walletAddress: string) => {
-  const { loading, error, data } = useQuery(gql(countOwnedProjectsQuery(walletAddress)))
+    const { loading, error, data } = useQuery(gql(countOwnedProjectsQuery(walletAddress)))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useCountOwnedProjects

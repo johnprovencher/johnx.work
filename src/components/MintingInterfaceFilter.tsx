@@ -14,50 +14,50 @@ interface Props {
 }
 
 const MintingInterfaceFilter = (
-  {
-    contractVersion,
-    coreContractAddress,
-    mintContractAddress,
-    projectId,
-    artistAddress,
-    scriptAspectRatio
-  }: Props
+    {
+        contractVersion,
+        coreContractAddress,
+        mintContractAddress,
+        projectId,
+        artistAddress,
+        scriptAspectRatio
+    }: Props
 ) => {
 
     const [v3ProjectAndMinterInfo, setV3ProjectAndMinterInfo] = useState<any | null>(null)
     const { data, isError, isLoading } = useContractRead({
-      address: mintContractAddress as `0x${string}`,
-      abi: MinterFilterV1ABI,
-      functionName: "getProjectAndMinterInfoAt",
-      args: [BigNumber.from(projectId)],
-      enabled: contractVersion === "V3",
-      watch: true,
-      onSuccess(data) {
-        setV3ProjectAndMinterInfo(data)
-      }
+        address: mintContractAddress as `0x${string}`,
+        abi: MinterFilterV1ABI,
+        functionName: "getProjectAndMinterInfoAt",
+        args: [BigNumber.from(projectId)],
+        enabled: contractVersion === "V3",
+        watch: true,
+        onSuccess(data) {
+            setV3ProjectAndMinterInfo(data)
+        }
     })
 
     if (contractVersion === "V3" && (!data || !v3ProjectAndMinterInfo || isLoading || isError)) {
-      return null
+        return null
     }
 
     let minterType = null
     let minterAddress = mintContractAddress
     if (contractVersion === "V3") {
-      if (!data || !v3ProjectAndMinterInfo || isLoading || isError) return null
-      minterType = v3ProjectAndMinterInfo?.minterType
-      minterAddress = v3ProjectAndMinterInfo.minterAddress
+        if (!data || !v3ProjectAndMinterInfo || isLoading || isError) return null
+        minterType = v3ProjectAndMinterInfo?.minterType
+        minterAddress = v3ProjectAndMinterInfo.minterAddress
     }
 
     const MintingInterface = getMintingInterface(contractVersion, minterType)
     return MintingInterface && (
-      <MintingInterface
-        coreContractAddress={coreContractAddress}
-        mintContractAddress={minterAddress}
-        projectId={projectId}
-        artistAddress={artistAddress}
-        scriptAspectRatio={scriptAspectRatio}
-      />
+        <MintingInterface
+            coreContractAddress={coreContractAddress}
+            mintContractAddress={minterAddress}
+            projectId={projectId}
+            artistAddress={artistAddress}
+            scriptAspectRatio={scriptAspectRatio}
+        />
     )
 }
 
