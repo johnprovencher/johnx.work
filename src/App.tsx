@@ -13,8 +13,7 @@ function App() {
     <Providers>
       <Router>
         <Routes>
-          <Route index element={<LandingPage/>}/>
-          <Route path="projects" element={<ProjectsPage/>}/>
+          <Route index element={<ProjectsPage/>}/>
           <Route path="project/:contractAddress/:projectId" element={<ProjectPage/>}/>
           <Route path="token/:contractAddress/:id" element={<TokenPage/>}/>
           <Route path="user/:walletAddress" element={<UserPage/>}/>

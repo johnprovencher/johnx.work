@@ -34,12 +34,18 @@ const { palette } = createTheme()
 
 const theme = createTheme({
   palette: {
+    background: {
+        default: "#000000"
+    },
+    text: {
+        primary: "#FFFFFF"
+    },
     primary: {
-      main: "#212121",
+      main: "#FFFFFF",
       contrastText: "#ECF0F1"
     },
     secondary: {
-      main: "#2C3E50",
+      main: "#FFFFFF",
       contrastText: "#ECF0F1"
     },
     success: {
@@ -56,10 +62,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      "Raleway",
-      "Geometric",
-      "Segoe UI",
-      "Helvetica Neue",
+      "Superstudio-Regular",
       "Arial",
       "sans-serif"
     ].join(",")
@@ -78,9 +81,9 @@ const theme = createTheme({
   }
 })
 
-theme.typography.h1 = {
-  fontFamily: "Archivo Black",
-  fontWeight: "400"
-}
+// theme.typography.h1 = {
+//   fontFamily: "Archivo Black",
+//   fontWeight: "400"
+// }
 
 export default theme
