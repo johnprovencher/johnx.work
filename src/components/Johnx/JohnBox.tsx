@@ -1,8 +1,11 @@
 import { Box, Typography } from "@mui/material"
+import { MouseEventHandler } from "react"
 
 interface Props {
-    disabled: boolean,
-    children: React.ReactNode
+    isContainer?: boolean,
+    onClick?: MouseEventHandler,
+    style?: Object
+    children: React.ReactNode,
 }
 
 interface ScrewProps {
@@ -23,21 +26,32 @@ const Screw = ({ top, left, bottom, right }:ScrewProps) => (
             top,
             left,
             bottom,
-            right
+            right,
         }}
     />
   )
 
-const JohnBox = ({disabled, children}: Props) => {
+const JohnBox = ({isContainer=false, onClick, style, children}: Props) => {
   return (
-    <Box sx={{position: 'relative', height: '33.5px', alignItems: 'center', display: 'inline-flex', backgroundColor: '#333333', borderRadius:'4px'}}>
+    <Box onClick={onClick} sx={{ cursor: `${onClick ? 'pointer' : ''}`, position: 'relative', height: '33.5px', alignItems: 'center', display: 'inline-flex', backgroundColor: '#333333', borderRadius:'4px'}} style={style}>
         <Box style={{height: '100%', width: '12px'}}>
             <Screw top='4px' left='4px' />
             <Screw bottom='4px' left='4px' />
         </Box>
-        <Typography fontSize={16} fontWeight={800} sx={{ px: 1 }}>
-          {children}
-        </Typography>
+        {
+            isContainer && (
+            <>
+            {children}
+            </>
+            )
+        }
+        {
+            !isContainer && (
+            <Typography fontSize={16} fontWeight={800} sx={{ px: 1 }}>
+            {children}
+            </Typography>
+            )
+        }
         <Box style={{height: '100%', width: '12px'}}>
             <Screw top='4px' right='4px' />
             <Screw bottom='4px' right='4px' />

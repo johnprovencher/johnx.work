@@ -71,25 +71,22 @@ const drawer = (
     </Box>
 )
 return (
-    <Box sx={{width: "100%", display: "flex", justifyContent: "center", backgroundColor: "black"}}>
-        <AppBar component="nav" position="static" elevation={1} sx={{backgroundColor: "black", boxShadow: 0}}>
-            <Box sx={{width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between", backgroundColor: "black"}}>
-                <Box sx={{display: "flex", backgroundColor: "black", justifyContent: "center", alignItems: "center"}}>
-                    <Box sx={{px: 2 }}>
-                        <Link href="/" sx={{display: "flex"}}>
-                            <img src="/media/johnx.jpg" alt="johnx" height={54} style={{borderRadius: "50%", border: "1px solid rgba(255, 255, 255, 0.4)" }}></img>
-                        </Link>
-                    </Box>
-                    <JohnBox disabled={false}> 
-                        welcome to johnx.work, a home for on-chain generative art by john provencher...
-                    </JohnBox>
+    <Box sx={{position: "sticky", top: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: "black"}}>
+        <Box sx={{width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between", backgroundColor: "black"}}>
+            <Box sx={{display: "flex", backgroundColor: "black", justifyContent: "center", alignItems: "center"}}>
+                <Box sx={{px: 2 }}>
+                    <Link href="/" sx={{display: "flex"}}>
+                        <img src="/media/johnx.jpg" alt="johnx" height={54} style={{borderRadius: "50%", border: "1px solid rgba(255, 255, 255, 0.4)" }}></img>
+                    </Link>
                 </Box>
-                <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>
-                    <Connect/>
-                </Box>
+                <JohnBox> 
+                    welcome to johnx.work, a home for on-chain generative art by john provencher...
+                </JohnBox>
             </Box>
-
-        </AppBar>
+            <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>
+                <Connect/>
+            </Box>
+        </Box>
         <Box component="nav">
             <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{keepMounted: true}}
             sx={{
