@@ -24,39 +24,30 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
     const token = project?.tokens[0]
     return (
         <Box>
-            <Box>
+            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Link href={`/project/${project.contract.id}/${project.projectId}`} underline="hover">
-                    <Typography variant="h1" fontSize={36}>
+                    <Typography fontSize={16} fontWeight={800}>
                         {project.name}
                     </Typography>
                 </Link>
-                <Typography variant="h6" mb={1}>
-          by {project.artistName}
-                </Typography>
+                <ProjectDate
+                    startTime={project.minterConfiguration?.startTime}
+                />
             </Box>
             <TokenView
                 contractAddress={project.contract.id}
+                width={300}
                 tokenId={token?.tokenId}
-                width={width}
                 invocation={token?.invocation}
                 aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)}
             />
-            <Box>
-                <Box sx={{display: "flex", alignItems:"center"}}>
-
-                    <ProjectStatusBadge complete={project.complete} paused={project.paused} startTime={project?.minterConfiguration?.startTime} />
-                    <ProjectDate
-                        startTime={project.minterConfiguration?.startTime}
-                    />
-                </Box>
-                {
-                    showDescription && (
-                        <Box marginTop={2}>
-                            <Collapsible content={project.description}/>
-                        </Box>
-                    )
-                }
-            </Box>
+            {
+                showDescription && (
+                    <Box marginTop={2}>
+                        <Collapsible content={project.description}/>
+                    </Box>
+                )
+            }
         </Box>
     )
 }

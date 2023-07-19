@@ -18,22 +18,20 @@ interface Props {
 const TokenView = ({
     contractAddress,
     tokenId,
-    width,
     invocation,
     aspectRatio=1,
     live=false
 }: Props) => {
-    const height = width / aspectRatio
     return (
-        <Box width={String(width)+"px"} height={String(height)+"px"}>
+        <Box >
             <Card sx={{borderRadius: 0, boxShadow: 0}}>
                 {
                     live ?
                         (
-                            <TokenLive contractAddress={contractAddress} tokenId={tokenId} width={width} height={height}/>
+                            <TokenLive contractAddress={contractAddress} tokenId={tokenId} width={300} height={300} />
                         ) :
                         (
-                            <TokenImage contractAddress={contractAddress} tokenId={tokenId} width={width} height={height}/>
+                            <TokenImage contractAddress={contractAddress} tokenId={tokenId} />
                         )
                 }
             </Card>
@@ -41,7 +39,7 @@ const TokenView = ({
                 (
                     <Box sx={{width: "100%", display: "flex", justifyContent: "flex-end"}}>
                         <Link href={`/token/${contractAddress}/${tokenId}`} sx={{fontSize: "14px", textDecoration: "none"}}>
-                    No. { invocation?.toString() }
+                            No. { invocation?.toString() }
                         </Link>
                     </Box>
                 )

@@ -9,7 +9,8 @@ import {
     List,
     ListItem,
     ListItemButton,
-    ListItemText
+    ListItemText,
+    useMediaQuery
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import Connect from "components/Connect"
@@ -37,6 +38,7 @@ let items = [
 const Header = () => {
     const { address, isConnected } = useAccount()
     const [mobileOpen, setMobileOpen] = useState(false)
+    const isSmallScreen = useMediaQuery('(max-width:1200px)');
 
     let userItem = items.find((item) => {
         return item.label === "Owned"
@@ -71,7 +73,7 @@ const Header = () => {
         </Box>
     )
     return (
-        <Box sx={{position: "sticky", top: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: "black"}}>
+        <Box sx={{position: "sticky", top: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: "black", zIndex: 1}}>
             <Box sx={{width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between", backgroundColor: "black"}}>
                 <Box sx={{display: "flex", backgroundColor: "black", justifyContent: "center", alignItems: "center"}}>
                     <Box sx={{px: 2 }}>
@@ -80,7 +82,11 @@ const Header = () => {
                         </Link>
                     </Box>
                     <JohnBox> 
-                    welcome to johnx.work, a home for on-chain generative art by john provencher...
+                        {
+                            isSmallScreen
+                                ? 'welcome to johnx.work'
+                                : 'welcome to johnx.work, a home for on-chain generative art by john provencher...'
+                        }
                     </JohnBox>
                 </Box>
                 <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>

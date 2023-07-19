@@ -54,7 +54,7 @@ const TokenLive = ({contractAddress, tokenId, width, height}: Props) => {
 
     if (pollingTime > 500) {
         return (
-            <TokenImage contractAddress={contractAddress} tokenId={tokenId} width={width} height={height}/>
+            <TokenImage contractAddress={contractAddress} tokenId={tokenId} />
         )
     }
 

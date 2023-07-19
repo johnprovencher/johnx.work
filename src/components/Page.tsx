@@ -14,7 +14,7 @@ const Page = ({ children }: Props) => {
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
             <Header/>
             <main>
-                <Container sx={{paddingTop: 1}}>
+                <Container sx={{paddingTop: 1, maxWidth:'100%'}} maxWidth={false}>
                     {children}
                 </Container>
             </main>
