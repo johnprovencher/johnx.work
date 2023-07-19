@@ -49,15 +49,6 @@ const projectsQuery = ({ first, skip, orderDirection }: ProjectsQueryParams) => 
         tokenId
         invocation
       }
-      minterConfiguration {
-        basePrice
-        startPrice
-        priceIsConfigured
-        currencySymbol
-        currencyAddress
-        startTime
-        endTime
-      }
     }
   }`
 
