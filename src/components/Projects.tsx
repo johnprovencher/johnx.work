@@ -31,7 +31,11 @@ const Projects = () => {
                             :
                             data?.projects?.length > 0 ?
                                 (
-                                    <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'}}>
+                                    <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+                                        '@media screen and (max-width: 465px)': {
+                                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                        }
+                                    }}>
                                         {
                                             data?.projects && (
                                                 data.projects.map((project: Project) => (
@@ -97,12 +101,12 @@ const Projects = () => {
                                     null
                 }
             </Box>
-            <Box py={4} sx={{ display: 'grid', position: 'relative', gridGap: '2em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'}}>
+            <Box py={4} sx={{ display: 'grid', position: 'relative', gridGap: '2em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', '@media screen and (max-width: 465px)': {gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' } }}>
                 <Box sx={{ display: 'inline-flex', flexDirection: 'column', gap:'1em', justifyContent:'space-between' }}>
                     <Typography fontSize={16} fontWeight={800} sx={{color:"rgba(255,255,255,0.5)"}}>
                         SUBSCRIBE FOR UPDATES   
                     </Typography>
-                    <Box sx={{ display: 'inline-flex', gap:'8px' }}>
+                    <Box sx={{ display: 'inline-flex', gap:'8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
                         <JohnBox onClick={() => window.location.href="mailto:johnprovencher@gmail.com" }>
                             johnprovencher@gmail.com
                         </JohnBox>
