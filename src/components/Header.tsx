@@ -38,6 +38,7 @@ let items = [
 const Header = () => {
     const { address, isConnected } = useAccount()
     const [mobileOpen, setMobileOpen] = useState(false)
+    const isMobile = useMediaQuery('(max-width:465px)');
     const isSmallScreen = useMediaQuery('(max-width:1200px)');
 
     let userItem = items.find((item) => {
@@ -81,13 +82,17 @@ const Header = () => {
                             <img src="/media/johnx.jpg" alt="johnx" height={54} style={{borderRadius: "50%", border: "1px solid rgba(255, 255, 255, 0.4)" }}></img>
                         </Link>
                     </Box>
-                    <JohnBox> 
-                        {
-                            isSmallScreen
-                                ? 'welcome to johnx.work'
-                                : 'welcome to johnx.work, a home for on-chain generative art by john provencher...'
-                        }
-                    </JohnBox>
+                    { 
+                        !isMobile && (
+                            <JohnBox> 
+                                {
+                                    isSmallScreen
+                                        ? 'welcome to johnx.work'
+                                        : 'welcome to johnx.work, a home for on-chain generative art by john provencher...'
+                                }
+                            </JohnBox>
+                        )
+                    }
                 </Box>
                 <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>
                     <Connect/>
