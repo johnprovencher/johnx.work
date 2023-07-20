@@ -175,6 +175,239 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Typography>
                 </Box>
             </Box>
+            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+                '@media screen and (max-width: 465px)': {
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                }
+            }}>
+                <Box sx={{ gridColumnStart: '1', gridColumnEnd: '3', display: 'inline-flex', flexDirection: 'column', gap: '1em' }}>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
+                        <Box sx={{width: '60px'}}>
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        </Box>
+                        <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{position: 'relative'}}>
+                                <JohnDotsLine />
+                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+                <Box sx={{ height: '100px', backgroundColor: 'orange' }}>
+                    
+                </Box>
+            </Box>
             {/* <Grid spacing={2} container>
                 {
                     token && (
