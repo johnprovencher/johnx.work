@@ -22,9 +22,9 @@ const TokenView = ({
     aspectRatio=1,
     live=false
 }: Props) => {
-    
+
     return (
-        <Box p={'2em'}>
+        <Box px={'2em'} py={'1.5em'}>
             <Card sx={{borderRadius: 0, boxShadow: 0}}>
                 {
                     live ?
@@ -36,7 +36,7 @@ const TokenView = ({
                         )
                 }
             </Card>
-            { invocation !== undefined &&
+            {/* { invocation !== undefined &&
                 (
                     <Box sx={{width: "100%", display: "flex", justifyContent: "flex-end"}}>
                         <Link href={`/token/${contractAddress}/${tokenId}`} sx={{fontSize: "14px", textDecoration: "none"}}>
@@ -44,7 +44,7 @@ const TokenView = ({
                         </Link>
                     </Box>
                 )
-            }
+            } */}
         </Box>
     )
 }
