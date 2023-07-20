@@ -30,6 +30,7 @@ import { getContractConfigByAddress } from "utils/contractInfoHelper"
 import EditProjectButton from "components/EditProjectButton"
 import { useAccount } from "wagmi"
 import MintingInterfaceFilter from "components/MintingInterfaceFilter"
+import Footer from "./Footer"
 
 interface Props {
   contractAddress: string
@@ -210,6 +211,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Stack>
                 </Box>
             </Box>
+            <Footer />
         </Box>
     )
 }
