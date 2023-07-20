@@ -11,9 +11,7 @@ const Page = ({ children }: Props) => {
     return (
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
             <main>
-                <Container sx={{maxWidth:'100%'}} maxWidth={false}>
-                    {children}
-                </Container>
+                {children}
             </main>
         </Box>
     )

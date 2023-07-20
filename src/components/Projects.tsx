@@ -9,7 +9,7 @@ const Projects = () => {
     const { loading, error, data } = useProjects()
 
     return (
-        <Box sx={{maxWidth:'1400px'}}>
+        <Box sx={{px: '24px', maxWidth:'1400px'}}>
             <Box>
                 {
                     loading ?

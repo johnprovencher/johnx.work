@@ -1,10 +1,5 @@
-import {
-    Box,
-    Link,
-    useMediaQuery
-} from "@mui/material"
+import { Box, Link } from "@mui/material"
 import Connect from "components/Connect"
-import JohnBox from "./Johnx/JohnBox"
 
 interface Props {
     children: React.ReactNode,
@@ -12,12 +7,10 @@ interface Props {
 }
 
 const Header = ({children, transparent=false}: Props)=> {
-    const isMobile = useMediaQuery('(max-width:465px)');
-    const isSmallScreen = useMediaQuery('(max-width:1200px)');
 
     return (
-        <Box sx={{position: "sticky", top: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: `${ transparent ? "transparent" : "black"}`, zIndex: 1}}>
-            <Box sx={{width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between"}}>
+        <Box sx={{position: `${ transparent ? "fixed" : "sticky"}`, top: 0, left: 0, right: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: `${ transparent ? "transparent" : "black"}`, zIndex: 1}}>
+            <Box sx={{px: '24px', width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between"}}>
                 <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Box sx={{px: 2 }}>
                         <Link href="/" sx={{display: "flex"}}>

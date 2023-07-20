@@ -4,7 +4,7 @@ const JohnDotsLine = () => {
     return (
         <Box sx={{
             width: '100%',
-            color: 'white',
+            color: 'inherit',
             position: 'absolute',
             top: 0,
             left: 0,

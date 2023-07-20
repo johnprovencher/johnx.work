@@ -31,6 +31,11 @@ import EditProjectButton from "components/EditProjectButton"
 import { useAccount } from "wagmi"
 import MintingInterfaceFilter from "components/MintingInterfaceFilter"
 import Footer from "./Footer"
+import TokenImage from "./TokenImage"
+import TokenLive from "./TokenLive"
+import JohnDotsPercentage from "./Johnx/JohnDotsPercentage"
+import JohnBox from "./Johnx/JohnBox"
+import JohnDotsLine from "./Johnx/JohnDotsLine"
 
 interface Props {
   contractAddress: string
@@ -52,6 +57,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
             ? windowSize.width - 48
             : windowSize.width - 32
     const contractConfig = getContractConfigByAddress(contractAddress)
+    const projectIsLive = false
 
     if (error) {
         return (
@@ -68,16 +74,108 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     }
 
     return project && contractConfig && (
-        <Box>
-            <Breadcrumbs aria-label="breadcrumb" sx={{marginBottom: 4}}>
-                <Link href="/projects" underline="hover" sx={{color: "#666"}}>
-          Home
-                </Link>
-                <Typography>
-                    {project.name}
-                </Typography>
-            </Breadcrumbs>
-            <Grid spacing={2} container>
+        <Box sx={{px: '24px', maxWidth:'1400px'}}>
+            <Box sx={{width:'52%', margin:'auto', paddingBottom: '4em'}}>
+                {
+                    projectIsLive ?
+                        (
+                            <TokenLive contractAddress={contractAddress} tokenId={token.tokenId} width={300} height={300} />
+                        ) :
+                        (
+                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        )
+                }
+            </Box>
+            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+                '@media screen and (max-width: 465px)': {
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                }
+            }}>
+                <Box > 
+                    <Box sx={{height: '100px'}}>
+                        <Typography>title</Typography>
+                        <Typography>release date</Typography>
+                    </Box>
+                    <Box sx={{display: 'flex', gap: '4px', justifyContent: 'space-between'}}> 
+                        <Box sx={{display: 'inline-flex', gap: '4px'}}> 
+                            <Typography fontSize={16} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
+                                <span>{project.invocations.toString()}/{project.maxInvocations.toString()}</span>
+                            </Typography> 
+                            <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
+                        </Box>
+                        <JohnBox>
+                            { `mint ${project.pricePerTokenInWei} eth`}  
+                        </JohnBox>
+                    </Box>
+                </Box>
+                <Box>
+                    <Box sx={{height: '100px'}}>
+                        <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
+                            <JohnDotsLine />
+                            <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
+                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                editions size
+                                </Typography>
+                                <Typography fontSize={16} fontWeight={800} sx={{color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                    { project.maxInvocations.toString() }
+                                </Typography>
+                            </Box>
+                        </Box>
+                        <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
+                            <JohnDotsLine />
+                            <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
+                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                mint price
+                                </Typography>
+                                <Typography fontSize={16} fontWeight={800} sx={{color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                    { `${project.pricePerTokenInWei.toString()}eth` }
+                                </Typography>
+                            </Box>
+                        </Box>
+                        <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
+                            <JohnDotsLine />
+                            <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
+                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                medium
+                                </Typography>
+                                <Typography fontSize={16} fontWeight={800} sx={{color: "rgba(255,255,255,0.5)", backgroundColor: "black"}}>
+                                    { `question mark` }
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Typography fontSize={16} fontWeight={800}>
+                        { project.description}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1512 johnx.eth connected
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1507 johnx.eth minted
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1512 johnx.eth minted
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1421 johnx.eth connected
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1432 johnx.eth connected
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1512 johnx.eth connected
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1507 johnx.eth minted
+                    </Typography>
+                    <Typography fontSize={16} fontWeight={800}>
+                    ? 1512 johnx.eth minted
+                    </Typography>
+                </Box>
+            </Box>
+            {/* <Grid spacing={2} container>
                 {
                     token && (
                         <Grid item md={8}>
@@ -210,7 +308,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         />
                     </Stack>
                 </Box>
-            </Box>
+            </Box> */}
             <Footer />
         </Box>
     )
