@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 
-const JohnDots = () => {
+const JohnDotsLine = () => {
     return (
         <Box sx={{
             width: '100%',
@@ -17,4 +17,4 @@ const JohnDots = () => {
     )
 }
 
-export default JohnDots
+export default JohnDotsLine
