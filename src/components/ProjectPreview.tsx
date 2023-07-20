@@ -9,6 +9,7 @@ import Collapsible from "components/Collapsible"
 import ProjectDate from "components/ProjectDate"
 import TokenView from "components/TokenView"
 import ProjectStatusBadge from "./ProjectStatusBadge"
+import JohnDots from "./Johnx/JohnDots"
 
 interface Props {
   project: Project
@@ -24,15 +25,29 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
     const token = project?.tokens[0]
     return (
         <Box>
-            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <Link href={`/project/${project.contract.id}/${project.projectId}`} underline="hover">
-                    <Typography fontSize={16} fontWeight={800}>
-                        {project.name}
-                    </Typography>
-                </Link>
-                <ProjectDate
-                    startTime={project.minterConfiguration?.startTime}
-                />
+            <Box sx={{position: 'relative'}}>
+                <JohnDots />
+                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Link href={`/project/${project.contract.id}/${project.projectId}`} underline="hover">
+                        <Typography fontSize={16} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
+                            {project.name}
+                        </Typography>
+                    </Link>
+                    {
+                        project.minterConfiguration && (
+                            <ProjectDate
+                                startTime={project.minterConfiguration?.startTime}
+                            />
+                        )
+                    }
+                    {
+                        !project.minterConfiguration && (
+                            <Typography fontSize={16} fontWeight={800} pl={'1ch'} sx={{backgroundColor: 'black'}}>
+                                {project.artistName}
+                            </Typography>
+                        )
+                    }
+                </Box>
             </Box>
             <TokenView
                 contractAddress={project.contract.id}

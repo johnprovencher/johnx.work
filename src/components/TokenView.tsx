@@ -22,8 +22,9 @@ const TokenView = ({
     aspectRatio=1,
     live=false
 }: Props) => {
+    
     return (
-        <Box >
+        <Box p={'2em'}>
             <Card sx={{borderRadius: 0, boxShadow: 0}}>
                 {
                     live ?
@@ -31,7 +32,7 @@ const TokenView = ({
                             <TokenLive contractAddress={contractAddress} tokenId={tokenId} width={300} height={300} />
                         ) :
                         (
-                            <TokenImage contractAddress={contractAddress} tokenId={tokenId} />
+                            <TokenImage contractAddress={contractAddress} tokenId={tokenId} aspectRatio={aspectRatio} />
                         )
                 }
             </Card>
