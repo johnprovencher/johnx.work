@@ -60,9 +60,9 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
                             </Typography> 
                             <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
                         </Box>
-                        <JohnBox>
+                        <JohnBox isContainer={true} onClick={() => window.location.href = `/project/${project.contract.id}/${project.projectId}`}>
                             <Typography fontSize={16} fontWeight={800}>
-                                launch
+                                    launch
                             </Typography>
                         </JohnBox>
                     </Box>
