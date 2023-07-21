@@ -29,7 +29,7 @@ const projectQuery = (id: string) => `
       currencySymbol
       createdAt
       activatedAt
-      tokens (first:1 orderBy: createdAt orderDirection: desc) {
+      tokens {
         id
         tokenId
         invocation
