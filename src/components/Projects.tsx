@@ -37,8 +37,9 @@ const Projects = () => {
                                     }}>
                                         {
                                             data?.projects && (
-                                                data.projects.map((project: Project) => (
+                                                data.projects.map((project: Project, idx:number) => (
                                                     <ProjectPreview
+                                                        key={idx}
                                                         project={project}
                                                         showDescription
                                                     />
@@ -47,38 +48,20 @@ const Projects = () => {
                                         }
                                         {
                                             data?.projects && (
-                                                data.projects.map((project: Project) => (
+                                                data.projects.map((project: Project, idx:number) => (
                                                     <ProjectPreview
+                                                        key={idx}
                                                         project={project}
                                                         showDescription
                                                     />
                                                 ))
                                             )
-                                        }
+                                        }                                        
                                         {
                                             data?.projects && (
-                                                data.projects.map((project: Project) => (
+                                                data.projects.map((project: Project, idx:number) => (
                                                     <ProjectPreview
-                                                        project={project}
-                                                        showDescription
-                                                    />
-                                                ))
-                                            )
-                                        }
-                                        {
-                                            data?.projects && (
-                                                data.projects.map((project: Project) => (
-                                                    <ProjectPreview
-                                                        project={project}
-                                                        showDescription
-                                                    />
-                                                ))
-                                            )
-                                        }
-                                        {
-                                            data?.projects && (
-                                                data.projects.map((project: Project) => (
-                                                    <ProjectPreview
+                                                        key={idx}
                                                         project={project}
                                                         showDescription
                                                     />

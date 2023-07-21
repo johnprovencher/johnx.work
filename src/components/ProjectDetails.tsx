@@ -14,6 +14,10 @@ import JohnBox from "./Johnx/JohnBox"
 import JohnDotsLine from "./Johnx/JohnDotsLine"
 import { parseAspectRatio } from "utils/scriptJSON"
 import { Token } from "utils/types"
+import useTokenTraits from "hooks/useTokenTraits"
+import { Trait } from "utils/types"
+import { idText } from "typescript"
+import { useEffect, useState } from "react"
 
 interface Props {
   contractAddress: string
@@ -23,95 +27,74 @@ interface Props {
 const ProjectDetails = ({ contractAddress, id }: Props) => {
     const { loading, error, data } = useProject(`${contractAddress}-${id}`)
     const project = data?.project
-    const token = project?.tokens[0]
+    const firstToken = project?.tokens[0]
     const contractConfig = getContractConfigByAddress(contractAddress)
     const projectIsLive = false
+    const [selectedToken, setSelectedToken] = useState(firstToken)
+    const [selectedTokenTraits, setselectedTokenTraits] = useState(null)
 
-    const ProjectMetadataHeader = () => (
-        <Box sx={{ display: 'flex', width: '100%', gap: '2em', color: "rgba(255,255,255,0.5)" }}>
+    interface RowProps {
+        isHeader?: boolean,
+        token?: Token
+    }
+
+    const ProjectMetadataRow = ({isHeader=false, token}: RowProps) => (
+        <Box sx={{ display: 'flex', width: '100%', gap: '2em', color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(token) { setSelectedToken(token) } }} >
             <Box sx={{position: 'relative', textAlign: 'center', width: '50px'}}>
-                <Typography sx={{position: 'relative', backgroundColor: 'black'}}>img</Typography>
+                {
+                    isHeader ? 
+                        (
+                            <Typography sx={{position: 'relative', backgroundColor: 'black'}}>img</Typography>
+                        )
+                        :
+                        (
+                            <TokenImage contractAddress={project.contract.id} tokenId={token!.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        )
+                }
             </Box>
             <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
                 <Box sx={{position: 'relative'}}>
                     <JohnDotsLine />
                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>metadata 1</Typography>
+                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata1' : 'cell' } </Typography>
                     </Box>
                 </Box>
                 <Box sx={{position: 'relative'}}>
                     <JohnDotsLine />
                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>metadata 2</Typography>
+                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata2' : 'cell' }</Typography>
                     </Box>
                 </Box>
                 <Box sx={{position: 'relative'}}>
                     <JohnDotsLine />
                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>metadata 3</Typography>
+                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata3' : 'cell' }</Typography>
                     </Box>
                 </Box>
                 <Box sx={{position: 'relative'}}>
                     <JohnDotsLine />
                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>metadata 4</Typography>
+                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata4' : 'cell' }</Typography>
                     </Box>
                 </Box>
                 <Box sx={{position: 'relative'}}>
                     <JohnDotsLine />
                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>metadata 5</Typography>
+                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata5' : 'cell' }</Typography>
                     </Box>
                 </Box>
             </Box>
         </Box>
     )
 
-    const ProjectMetadataRow = () => (
-        <Box sx={{ display: 'flex', width: '100%', gap: '2em' }}>
-            <Box sx={{width: '50px'}}>
-                <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
-            </Box>
-            <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>cell</Typography>
-                    </Box>
-                </Box>
-            </Box>
-        </Box>
-    )
+    const { loading: traitLoading, error: traitError, data: traitdata } = useTokenTraits(contractAddress, selectedToken.tokenId)
+    const traits = traitdata?.traits
 
     if (error) {
         return (
             <Box>
                 <Alert severity="error">
-          Error loading project
+                    Error loading project
                 </Alert>
             </Box>
         )
@@ -121,10 +104,6 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
         return <Loading/>
     }
 
-    console.log('project tokens: ' + project.tokens)
-    console.log('project tokens: ' + project.tokens.length)
-    console.log('project token 1: ' + (project.tokens[0] as Token).tokenId)
-
 
     return project && contractConfig && (
         <Box sx={{px: '24px', maxWidth:'1400px'}}>
@@ -132,10 +111,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                 {
                     projectIsLive ?
                         (
-                            <TokenLive contractAddress={contractAddress} tokenId={token.tokenId} width={300} height={300} />
+                            <TokenLive contractAddress={contractAddress} tokenId={firstToken.tokenId} width={300} height={300} />
                         ) :
                         (
-                            <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                            <TokenImage contractAddress={project.contract.id} tokenId={firstToken.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                         )
                 }
             </Box>
@@ -234,33 +213,36 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                 }
             }}>
                 <Box sx={{ gridColumnStart: '1', gridColumnEnd: '3', display: 'inline-flex', flexDirection: 'column', gap: '1em' }}>
-                    <ProjectMetadataHeader />
+                    <ProjectMetadataRow isHeader={true} />
                     {
-                        Array.from({ length: Number(project.invocations) }).map((_, i) => (
-                            <ProjectMetadataRow key={i} />
+                        project.tokens?.map((token:Token, idx:number) => (
+                            <ProjectMetadataRow key={idx} token={token} />
                         ))
                     }
                 </Box>
                 <Box sx={{ display: 'inline-flex', flexDirection: 'column', gap: '1em'}}>
-                    <Box sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: "rgba(255,255,255,0.5)" }}>
+                    <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
                         <JohnDotsLine />
                         <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>item number</Typography>
+                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> item number </Typography>
+                        </Box>
+                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
+                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenId} </Typography>
                         </Box>
                     </Box>
                     <Box sx={{width: '100%', px: '2em'}}>
-                        <TokenImage contractAddress={project.contract.id} tokenId={token.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                     </Box>
                     <Box>
                         {
-                            Array.from({ length: 4 }).map((_, i) => (
-                                <Box key={i} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
+                            traits?.map((trait:Trait, idx:number) => (
+                                <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
                                     <JohnDotsLine />
                                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>item number</Typography>
+                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
                                     </Box>
                                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>12</Typography>
+                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
                                     </Box>
                                 </Box>
                             ))
