@@ -24,7 +24,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
                     const color = getColor(dotIndex);
                     column.push(
                         <Box
-                            key={dotIndex}
+                            key={k}
                             sx={{
                                 position: 'relative',
                                 backgroundColor: color,
@@ -37,6 +37,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
                 }
                 row.push(
                     <Box
+                        key={j}
                         sx={{
                             position: 'relative',
                             display: 'inline-flex',
@@ -51,6 +52,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
             }
             dots.push(
                 <Box
+                    key={i}
                     sx={{
                         position: 'relative',
                         display: 'inline-flex',
