@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@typechain/ethers-v5": "^10.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "typechain": "^8.1.0"
   }
 }
