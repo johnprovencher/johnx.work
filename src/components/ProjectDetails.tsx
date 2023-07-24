@@ -34,12 +34,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     useEffect(() => {
         if (traitsdataArray !== null && traitsdataArray !== undefined) { 
-            console.log('traitsdataArray: ' + traitsdataArray)
+            console.log('traitsdataArrayy: ' + traitsdataArray)
             let firstToken = traitsdataArray[0].data as any
 
             if (firstToken !== null && firstToken !== undefined) {
-                console.log('first Token: ' + firstToken)
-                console.log('first Token . traits: ' + firstToken.traits[0].value)
                 setSelectedToken(firstToken)
             }
         }
