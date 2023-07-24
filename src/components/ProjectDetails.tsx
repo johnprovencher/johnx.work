@@ -37,8 +37,9 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
             console.log('traitsdataArray: ' + traitsdataArray)
             let firstToken = traitsdataArray[0].data as any
 
-            if (firstToken !== null && firstToken !== undefined) { 
-                console.log('first Token: ' + traitsdataArray[0].data.traits[0].value)
+            if (firstToken !== null && firstToken !== undefined) {
+                console.log('first Token: ' + firstToken)
+                console.log('first Token . traits: ' + firstToken.traits[0].value)
                 setSelectedToken(firstToken)
             }
         }
