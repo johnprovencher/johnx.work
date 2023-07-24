@@ -1,8 +1,8 @@
 module.exports = {
     root: true,
     extends: [
-        "react-app",
-        "react-app/jest"
+        "plugin:react-hooks/recommended" // Add this line to enable react-hooks plugin
+        // You can include other ESLint configurations here if needed
     ],
     rules: {
         'new-cap': 'off',
