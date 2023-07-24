@@ -9,9 +9,9 @@ interface TokensQueryParams {
 }
 
 const tokensQuery = (projectId: string, {
-  first,
-  skip,
-  orderDirection
+    first,
+    skip,
+    orderDirection
 }: TokensQueryParams) => `
   query GetTokens {
     tokens(
@@ -29,21 +29,21 @@ const tokensQuery = (projectId: string, {
   }`
 
 const useTokens = (projectId: string, params: TokensQueryParams) => {
-  const first = params?.first || TOKENS_PER_PAGE
-  const skip = params?.skip || 0
-  const orderDirection = params?.orderDirection || OrderDirection.ASC
+    const first = params?.first || TOKENS_PER_PAGE
+    const skip = params?.skip || 0
+    const orderDirection = params?.orderDirection || OrderDirection.ASC
 
-  const { loading, error, data } = useQuery(gql(tokensQuery(projectId, {
-    first,
-    skip,
-    orderDirection
-  })))
+    const { loading, error, data } = useQuery(gql(tokensQuery(projectId, {
+        first,
+        skip,
+        orderDirection
+    })))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useTokens

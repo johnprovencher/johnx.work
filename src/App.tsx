@@ -7,29 +7,32 @@ import ProjectPage from "pages/ProjectPage"
 import TokenPage from "pages/TokenPage"
 import UserPage from "pages/UserPage"
 import Providers from "components/Providers"
+import TOUPage from "pages/TOUPage"
+import PrivacyPage from "pages/PrivacyPolicyPage"
 
 function App() {
-  return (
-    <Providers>
-      <Router>
-        <Routes>
-          <Route index element={<LandingPage/>}/>
-          <Route path="projects" element={<ProjectsPage/>}/>
-          <Route path="project/:contractAddress/:projectId" element={<ProjectPage/>}/>
-          <Route path="token/:contractAddress/:id" element={<TokenPage/>}/>
-          <Route path="user/:walletAddress" element={<UserPage/>}/>
-        </Routes>
-      </Router>
-      <ToastContainer
-        autoClose={10000}
-        position="bottom-right"
-        theme="dark"
-        newestOnTop
-        pauseOnHover
-        pauseOnFocusLoss
-      />
-    </Providers>
-  )
+    return (
+        <Providers>
+            <Router>
+                <Routes>
+                    <Route index element={<ProjectsPage/>}/>
+                    <Route path="project/:contractAddress/:projectId" element={<ProjectPage/>}/>
+                    <Route path="termsofuse" element={<TOUPage/>}/>
+                    <Route path="privacypolicy" element={<PrivacyPage/>}/>
+                    <Route path="token/:contractAddress/:id" element={<TokenPage/>}/>
+                    <Route path="user/:walletAddress" element={<UserPage/>}/>
+                </Routes>
+            </Router>
+            <ToastContainer
+                autoClose={10000}
+                position="bottom-right"
+                theme="dark"
+                newestOnTop
+                pauseOnHover
+                pauseOnFocusLoss
+            />
+        </Providers>
+    )
 }
 
 export default App

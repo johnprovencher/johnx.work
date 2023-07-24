@@ -1,21 +1,31 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { getContractConfigByAddress } from "utils/contractInfoHelper";
+import { Token } from "utils/types";
 
-const useTokenTraits = (contractAddress: string, tokenId: string) => {
-    const [data, setData] = useState<any | null>(null)
+const useTokenTraitsBatch = (contractAddress: string, tokens: Token[]): 
+{
+    loading: boolean;
+    error: boolean;
+    dataArray: any[] | null;
+} => {
+    const [dataArray, setDataArray] = useState<any[] | null>(null)
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
     const contractConfig = getContractConfigByAddress(contractAddress)
 
     useEffect(() => {
         setLoading(true)
-
         const fetchData = async () => {
             try {
                 const tokenUrl = contractConfig?.TOKEN_URL
-                const r = await axios.get(`${tokenUrl}/${contractAddress}/${tokenId}`)
-                setData(r.data)
+                const results = await Promise.all(
+                    tokens.map( async (token) => {
+                        const result = await axios.get(`${tokenUrl}/${contractAddress}/${token.tokenId}`)
+                        return result
+                    })
+                )
+                setDataArray(results)
             } catch (error) {
                 setError(true)
             } finally {
@@ -24,13 +34,13 @@ const useTokenTraits = (contractAddress: string, tokenId: string) => {
         }
 
         fetchData()
-    }, [tokenId, contractAddress])
+    }, [tokens, contractAddress, contractConfig])
 
     return {
         loading,
         error,
-        data
+        dataArray
     }
 }
 
-export default useTokenTraits
+export default useTokenTraitsBatch

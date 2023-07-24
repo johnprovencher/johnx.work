@@ -10,55 +10,55 @@ interface Props {
 }
 
 const ProjectStatusBadge = ({ complete, paused, startTime }: Props) => {
-  const startDate = startTime ? moment.unix(parseInt(startTime.toString())) : null;
+    const startDate = startTime ? moment.unix(parseInt(startTime.toString())) : null;
 
-  return (
-    <Box sx={{
-      display: 'flex',
-      alignItems: 'center',
-    }}>
-      {
-        startDate?.isAfter() ?
-        <Chip
-          label="Upcoming"
-          color="upcoming"
-          size="small"
-          sx={{ color: 'white', marginRight: 2, }}
-        />
-        : paused ? (
-          <Chip
-            label="Paused"
-            color="info"
-            size="small"
-            sx={{ color: 'white', marginRight: 2, }}
-          />
-        ) : !complete ? (
-          <Chip
-            label="Live"
-            color="success"
-            size="small"
-            sx={{ color: 'white', marginRight: 2 }}
-          />
-        ) : (
-          <Chip
-            label="Complete"
-            color="primary"
-            size="small"
-            variant="outlined"
-            sx={{ color: 'black', marginRight: 2 }}
-          />
-        )
-      }
+    return (
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+        }}>
+            {
+                startDate?.isAfter() ?
+                    <Chip
+                        label="Upcoming"
+                        color="upcoming"
+                        size="small"
+                        sx={{ color: 'white', marginRight: 2, }}
+                    />
+                    : paused ? (
+                        <Chip
+                            label="Paused"
+                            color="info"
+                            size="small"
+                            sx={{ color: 'white', marginRight: 2, }}
+                        />
+                    ) : !complete ? (
+                        <Chip
+                            label="Live"
+                            color="success"
+                            size="small"
+                            sx={{ color: 'white', marginRight: 2 }}
+                        />
+                    ) : (
+                        <Chip
+                            label="Complete"
+                            color="primary"
+                            size="small"
+                            variant="outlined"
+                            sx={{ color: 'black', marginRight: 2 }}
+                        />
+                    )
+            }
 
-      {
-        startDate && (
-          <Typography>
-            <br />
-          </Typography>
-        )
-      }
-    </Box>
-  )
+            {
+                startDate && (
+                    <Typography>
+                        <br />
+                    </Typography>
+                )
+            }
+        </Box>
+    )
 }
 
 export default ProjectStatusBadge;

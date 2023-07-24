@@ -14,13 +14,13 @@ const countProjectsQuery = () => `
   }`
 
 const useCountProjects = () => {
-  const { loading, error, data } = useQuery(gql(countProjectsQuery()))
+    const { loading, error, data } = useQuery(gql(countProjectsQuery()))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useCountProjects

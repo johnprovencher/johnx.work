@@ -29,31 +29,22 @@ const projectQuery = (id: string) => `
       currencySymbol
       createdAt
       activatedAt
-      tokens (first:1 orderBy: createdAt orderDirection: desc) {
+      tokens {
         id
         tokenId
         invocation
-      }
-      minterConfiguration {
-        basePrice
-        startPrice
-        priceIsConfigured
-        currencySymbol
-        currencyAddress
-        startTime
-        endTime
       }
     }
   }`
 
 const useProject = (id: string) => {
-  const { loading, error, data } = useQuery(gql(projectQuery(id)))
+    const { loading, error, data } = useQuery(gql(projectQuery(id)))
 
-  return {
-    loading,
-    error,
-    data
-  }
+    return {
+        loading,
+        error,
+        data
+    }
 }
 
 export default useProject

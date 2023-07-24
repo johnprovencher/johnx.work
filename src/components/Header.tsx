@@ -1,124 +1,30 @@
-import { useState } from "react"
-import {
-  Box,
-  Link,
-  AppBar,
-  Toolbar,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText
-} from "@mui/material"
-import MenuIcon from "@mui/icons-material/Menu"
+import { Box, Link } from "@mui/material"
 import Connect from "components/Connect"
-import { useAccount } from "wagmi"
 
-let items = [
-  {
-    label: "Projects",
-    url: "/projects",
-    enabled: true
-  },
-  {
-    label: "Owned",
-    url: "/user",
-    enabled: false
-  },
-  {
-    label: "Mint",
-    url: "/mint",
-    enabled: false
-  }
-]
+interface Props {
+    children: React.ReactNode,
+    transparent?: boolean
+}
 
-const Header = () => {
-  const { address, isConnected } = useAccount()
-  const [mobileOpen, setMobileOpen] = useState(false)
+const Header = ({children, transparent=false}: Props)=> {
 
-  let userItem = items.find((item) => {
-    return item.label === "Owned"
-  })
-  if (isConnected) {
-    if (userItem) {
-      userItem.enabled = true
-      userItem.url = `/user/${address}`
-    }
-  } else {
-    if (userItem) {
-      userItem.enabled = false
-      userItem.url = `/user`
-    }
-  }
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
-  }
-
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{textAlign: "center"}}>
-      <List dense>
-        {items.map((item) => (
-          <ListItem sx={{"&:hover": {backgroundColor: "#f5f5f5"}}} key={item.label} disablePadding>
-            <ListItemButton component={Link} href={item.url} sx={{textAlign: "left", pointerEvents: item.enabled ? "auto" : "none"}}>
-              <ListItemText primary={item.label} primaryTypographyProps={{fontSize: 18, fontWeight: 600, color: item.enabled ? "black" : "lightgrey"}}/>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  )
-  return (
-    <Box sx={{width: "100%", display: "flex", justifyContent: "center", backgroundColor: "black"}}>
-      <AppBar component="nav" position="static" elevation={1} sx={{backgroundColor: "black", boxShadow: 0}}>
-        <Toolbar sx={{width: "100%", display: "flex", margin: "auto", justifyContent: "space-between", backgroundColor: "white"}}>
-          <Box sx={{display: "flex", backgroundColor: "white", justifyContent: "center", alignItems: "center"}}>
-            <IconButton
-              color="default"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{mr: 2, display: {sm: "none"}}}>
-              <MenuIcon/>
-            </IconButton>
-            <Box sx={{paddingRight: "25px"}}>
-              <Link href="/" sx={{display: "flex"}}>
-                <img src="/media/logo.svg" alt="artblocks" height={26}></img>
-              </Link>
+    return (
+        <Box sx={{position: `${ transparent ? "fixed" : "sticky"}`, top: 0, left: 0, right: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: `${ transparent ? "transparent" : "black"}`, zIndex: 1}}>
+            <Box sx={{px: '24px', width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between"}}>
+                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <Box sx={{px: 2 }}>
+                        <Link href="/" sx={{display: "flex"}}>
+                            <img src="/media/johnx.jpg" alt="johnx" height={54} style={{borderRadius: "50%", border: "1px solid rgba(255, 255, 255, 0.4)", boxShadow: `${ transparent ? '0px 0px 13px 1px #ffffff' : ''}` }}></img>
+                        </Link>
+                    </Box>
+                    { children }
+                </Box>
+                <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>
+                    <Connect/>
+                </Box>
             </Box>
-            <Box sx={{display: {xs: "none", sm: "block"}, marginTop: "5px"}}>
-              {items.map((item) => (
-                  <Link
-                  key={item.label}
-                  href={item.url}
-                  underline="hover"
-                  sx={{fontSize: 18, fontWeight: 600, color: item.enabled ? "black" : "lightgrey", paddingRight: "25px", pointerEvents: item.enabled ? "auto" : "none"}}>
-                  {item.label}
-                </Link>
-              ))}
-            </Box>
-          </Box>
-          <Box>
-            <Connect/>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Box component="nav">
-        <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{keepMounted: true}}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: 240
-            }
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-    </Box>
-  )
+        </Box>
+    )
 }
 
 export default Header

@@ -11,8 +11,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
 import { GRAPHQL_URL, INFURA_KEY, EXPECTED_CHAIN_ID, WALLET_CONNECT_PROJECT_ID } from "config"
 
 const client = new ApolloClient({
-  uri: GRAPHQL_URL,
-  cache: new InMemoryCache()
+    uri: GRAPHQL_URL,
+    cache: new InMemoryCache()
 })
 
 // Defaults to goerli testing network if mainnet is not set
@@ -20,24 +20,24 @@ const expectedChains = [EXPECTED_CHAIN_ID === 1 ? mainnet : goerli]
 const initialChain = EXPECTED_CHAIN_ID === 1 ? mainnet : goerli
 
 const { chains, provider, webSocketProvider } = configureChains(
-  expectedChains,
-  [
-    infuraProvider({apiKey: INFURA_KEY, priority: 0}),
-    publicProvider({priority: 1})
-  ]
+    expectedChains,
+    [
+        infuraProvider({apiKey: INFURA_KEY, priority: 0}),
+        publicProvider({priority: 1})
+    ]
 )
 
 const { connectors } = getDefaultWallets({
-  appName: "Engine",
-  chains,
-  projectId: WALLET_CONNECT_PROJECT_ID
+    appName: "Engine",
+    chains,
+    projectId: WALLET_CONNECT_PROJECT_ID
 })
 
 const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-  webSocketProvider
+    autoConnect: true,
+    connectors,
+    provider,
+    webSocketProvider
 })
 
 interface Props {
@@ -45,25 +45,25 @@ interface Props {
 }
 
 const AppProvider = ({children}:Props) => {
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-         chains={chains}
-         initialChain={initialChain}
-         theme={
-          midnightTheme({
-            borderRadius: "medium"
-          })
-        }>
-        <ApolloProvider client={client}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-          </ThemeProvider>
-        </ApolloProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
-  )
+    return (
+        <WagmiConfig client={wagmiClient}>
+            <RainbowKitProvider
+                chains={chains}
+                initialChain={initialChain}
+                theme={
+                    midnightTheme({
+                        borderRadius: "medium"
+                    })
+                }>
+                <ApolloProvider client={client}>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline />
+                        {children}
+                    </ThemeProvider>
+                </ApolloProvider>
+            </RainbowKitProvider>
+        </WagmiConfig>
+    )
 }
 
 export default AppProvider

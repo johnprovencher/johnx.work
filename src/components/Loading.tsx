@@ -1,30 +1,30 @@
 import { useState } from "react"
 import {
-  Box,
-  CircularProgress
+    Box,
+    CircularProgress
 } from "@mui/material"
 import { Container } from "@mui/system"
 import useInterval from "hooks/useInterval"
 
 const Loading = () => {
-  const [waitTime, setWaitTime] = useState(0)
+    const [waitTime, setWaitTime] = useState(0)
 
-  useInterval(() => {
-    setWaitTime(waitTime+1)
-  }, 1000)
+    useInterval(() => {
+        setWaitTime(waitTime+1)
+    }, 1000)
 
-  return (
-    <Container>
-      {
-        waitTime > 0 &&
+    return (
+        <Container>
+            {
+                waitTime > 0 &&
         (
-          <Box display="flex" alignItems="center" justifyContent="center" width="100%">
-            <CircularProgress/>
-          </Box>
+            <Box display="flex" alignItems="center" justifyContent="center" width="100%">
+                <CircularProgress/>
+            </Box>
         )
-      }
-    </Container>
-  )
+            }
+        </Container>
+    )
 }
 
 export default Loading
