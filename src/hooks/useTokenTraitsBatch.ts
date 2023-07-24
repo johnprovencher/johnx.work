@@ -28,6 +28,7 @@ const useTokenTraitsBatch = (contractAddress: string, tokens: Token[]):
                 )
                 setDataArray(results)
             } catch (error) {
+                console.error(error)
                 setError(true)
             } finally {
                 setLoading(false)
