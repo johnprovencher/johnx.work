@@ -37,6 +37,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
         if (traitsdataArray) { 
             let firstToken = traitsdataArray[0].data as any
+            console.log('first Toekn: ' + JSON.parse(firstToken))
             setSelectedToken(firstToken)
         }
     }, [traitsdataArray])
