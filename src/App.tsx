@@ -7,6 +7,8 @@ import ProjectPage from "pages/ProjectPage"
 import TokenPage from "pages/TokenPage"
 import UserPage from "pages/UserPage"
 import Providers from "components/Providers"
+import TOUPage from "pages/TOUPage"
+import PrivacyPage from "pages/PrivacyPolicyPage"
 
 function App() {
     return (
@@ -15,6 +17,8 @@ function App() {
                 <Routes>
                     <Route index element={<ProjectsPage/>}/>
                     <Route path="project/:contractAddress/:projectId" element={<ProjectPage/>}/>
+                    <Route path="termsofuse" element={<TOUPage/>}/>
+                    <Route path="privacypolicy" element={<PrivacyPage/>}/>
                     <Route path="token/:contractAddress/:id" element={<TokenPage/>}/>
                     <Route path="user/:walletAddress" element={<UserPage/>}/>
                 </Routes>

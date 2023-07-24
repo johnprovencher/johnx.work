@@ -16,6 +16,7 @@ import { parseAspectRatio } from "utils/scriptJSON"
 import { Trait } from "utils/types"
 import { useEffect, useState } from "react"
 import useTokenTraitsBatch from "hooks/useTokenTraitsBatch"
+import { isUsingTestnet } from "utils/contractInfoHelper"
 
 interface Props {
   contractAddress: string
@@ -249,10 +250,12 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         }
                     </Box>
                     <Box sx={{ display: 'inline-flex', gap:'8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
-                        <JohnBox onClick={() => window.location.href="mailto:johnprovencher@gmail.com" }>
+                        <JohnBox onClick={() => window.location.href="www.google.com" }>
                             live view
                         </JohnBox>
-                        <JohnBox onClick={() => window.location.href="mailto:johnprovencher@gmail.com" }>
+                        <JohnBox onClick={ () =>
+                            window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
+                        }>
                             opensea
                         </JohnBox>
                     </Box>

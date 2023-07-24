@@ -59,12 +59,12 @@ const Footer = () => {
                                 VIEW ETHERSCAN CONTRACT
                         </Typography>
                     </Link>
-                    <Link href={`/`} underline="hover">
+                    <Link href={`/termsofuse`} underline="hover">
                         <Typography fontSize={16} fontWeight={800}>
                                 TERMS OF USE
                         </Typography>
                     </Link>
-                    <Link href={`/`} underline="hover">
+                    <Link href={`/privacypolicy`} underline="hover">
                         <Typography fontSize={16} fontWeight={800}>
                                 PRIVACY POLICY
                         </Typography>
