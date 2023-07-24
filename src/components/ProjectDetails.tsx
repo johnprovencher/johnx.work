@@ -236,7 +236,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Box>
                     <Box>
                         {
-                            selectedToken && selectedToken !== undefined && selectedToken?.traits.map((trait:Trait, idx:number) => (
+                            selectedToken && selectedToken.traits && selectedToken.traits.map((trait:Trait, idx:number) => (
                                 <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
                                     <JohnDotsLine />
                                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
