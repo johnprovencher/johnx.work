@@ -78,7 +78,7 @@ const TokenDetails = ({ contractAddress, id }: Props) => {
                     <Box sx={{marginTop: 1, display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                         <Box>
                             <Typography>
-                Owned by <Address address={token.owner.id}></Address>
+                                Owned by <Address address={token.owner.id}></Address>
                             </Typography>
                         </Box>
                         <Box sx={{display: "flex", justifyContent: "space-between"}}>
@@ -96,7 +96,7 @@ const TokenDetails = ({ contractAddress, id }: Props) => {
                                 }}
                             >
                                 <Typography fontSize="14px" display={["none", "none", "block"]}>
-                  Live view
+                                    Live view
                                 </Typography>
                             </Button>
                             <Button
@@ -114,7 +114,7 @@ const TokenDetails = ({ contractAddress, id }: Props) => {
                                 }}
                             >
                                 <Typography fontSize="14px" display={["none", "none", "block"]}>
-                  Image
+                                    Image
                                 </Typography>
                             </Button>
                         </Box>
@@ -122,7 +122,7 @@ const TokenDetails = ({ contractAddress, id }: Props) => {
                 </Grid>
                 <Grid item md={4}>
                     <Typography fontSize="16px" mb={4}>
-            Minted {moment.unix(token.createdAt).format("LL")}
+                        Minted {moment.unix(token.createdAt).format("LL")}
                     </Typography>
                     <Typography variant="h1">
                         {token.project.name} #{token.invocation}

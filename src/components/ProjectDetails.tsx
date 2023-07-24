@@ -13,11 +13,9 @@ import JohnDotsPercentage from "./Johnx/JohnDotsPercentage"
 import JohnBox from "./Johnx/JohnBox"
 import JohnDotsLine from "./Johnx/JohnDotsLine"
 import { parseAspectRatio } from "utils/scriptJSON"
-import { Token } from "utils/types"
-import useTokenTraits from "hooks/useTokenTraits"
 import { Trait } from "utils/types"
-import { idText } from "typescript"
 import { useEffect, useState } from "react"
+import useTokenTraitsBatch from "hooks/useTokenTraitsBatch"
 
 interface Props {
   contractAddress: string
@@ -27,19 +25,26 @@ interface Props {
 const ProjectDetails = ({ contractAddress, id }: Props) => {
     const { loading, error, data } = useProject(`${contractAddress}-${id}`)
     const project = data?.project
-    const firstToken = project?.tokens[0]
     const contractConfig = getContractConfigByAddress(contractAddress)
     const projectIsLive = false
-    const [selectedToken, setSelectedToken] = useState(firstToken)
-    const [selectedTokenTraits, setselectedTokenTraits] = useState(null)
+
+    const { dataArray: traitsdataArray } = useTokenTraitsBatch(contractAddress, project.tokens)
+    const [selectedToken, setSelectedToken] = useState<null| any>(null)
+
+    useEffect(() => {
+        if (traitsdataArray) { 
+            let firstToken = traitsdataArray[0].data as any
+            setSelectedToken(firstToken)
+        }
+    }, [traitsdataArray])
 
     interface RowProps {
         isHeader?: boolean,
-        token?: Token
+        tokenData?: any
     }
 
-    const ProjectMetadataRow = ({isHeader=false, token}: RowProps) => (
-        <Box sx={{ display: 'flex', width: '100%', gap: '2em', color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(token) { setSelectedToken(token) } }} >
+    const ProjectMetadataRow = ({isHeader=false, tokenData}: RowProps) => (
+        <Box sx={{ display: 'flex', width: '100%', gap: '2em', color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(tokenData) { setSelectedToken(tokenData) } }} >
             <Box sx={{position: 'relative', textAlign: 'center', width: '50px'}}>
                 {
                     isHeader ? 
@@ -48,47 +53,28 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         )
                         :
                         (
-                            <TokenImage contractAddress={project.contract.id} tokenId={token!.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                            <TokenImage contractAddress={project.contract.id} tokenId={tokenData.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                         )
                 }
             </Box>
-            <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: 'repeat(5, 1fr)' }}>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata1' : 'cell' } </Typography>
+            {
+                tokenData && tokenData.traits && (
+                    <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: `repeat(${tokenData.traits.length}, 1fr)` }}>
+                        {
+                            tokenData.traits.map((trait:any, idx:number) => (
+                                <Box key={idx} sx={{position: 'relative'}}>
+                                    <JohnDotsLine />
+                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? trait.trait_type : trait.value } </Typography>
+                                    </Box>
+                                </Box>
+                            ))
+                        }
                     </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata2' : 'cell' }</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata3' : 'cell' }</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata4' : 'cell' }</Typography>
-                    </Box>
-                </Box>
-                <Box sx={{position: 'relative'}}>
-                    <JohnDotsLine />
-                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? 'metadata5' : 'cell' }</Typography>
-                    </Box>
-                </Box>
-            </Box>
+                )
+            }
         </Box>
     )
-
-    const { loading: traitLoading, error: traitError, data: traitdata } = useTokenTraits(contractAddress, selectedToken.tokenId)
-    const traits = traitdata?.traits
 
     if (error) {
         return (
@@ -109,13 +95,15 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
         <Box sx={{px: '24px', maxWidth:'1400px'}}>
             <Box sx={{width:'52%', margin:'auto', paddingBottom: '4em'}}>
                 {
-                    projectIsLive ?
-                        (
-                            <TokenLive contractAddress={contractAddress} tokenId={firstToken.tokenId} width={300} height={300} />
-                        ) :
-                        (
-                            <TokenImage contractAddress={project.contract.id} tokenId={firstToken.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
-                        )
+                    project.tokens && (
+                        projectIsLive ?
+                            (
+                                <TokenLive contractAddress={contractAddress} tokenId={project.tokens[0].tokenId} width={300} height={300} />
+                            ) :
+                            (
+                                <TokenImage contractAddress={project.contract.id} tokenId={project.tokens[0].tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                            )
+                    )
                 }
             </Box>
             <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
@@ -213,10 +201,14 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                 }
             }}>
                 <Box sx={{ gridColumnStart: '1', gridColumnEnd: '3', display: 'inline-flex', flexDirection: 'column', gap: '1em' }}>
-                    <ProjectMetadataRow isHeader={true} />
                     {
-                        project.tokens?.map((token:Token, idx:number) => (
-                            <ProjectMetadataRow key={idx} token={token} />
+                        traitsdataArray && (
+                            <ProjectMetadataRow isHeader={true} tokenData={traitsdataArray[0].data} />
+                        )
+                    }
+                    {
+                        traitsdataArray?.map((tokenData:any, idx:number) => (
+                            <ProjectMetadataRow key={idx} tokenData={tokenData.data} />
                         ))
                     }
                 </Box>
@@ -227,15 +219,23 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             <Typography sx={{position: 'relative', backgroundColor: 'black' }}> item number </Typography>
                         </Box>
                         <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
-                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenId} </Typography>
+                            {
+                                selectedToken && (
+                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
+                                )
+                            }
                         </Box>
                     </Box>
                     <Box sx={{width: '100%', px: '2em'}}>
-                        <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenId} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                        {
+                            selectedToken && (
+                                <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                            )
+                        }
                     </Box>
                     <Box>
                         {
-                            traits?.map((trait:Trait, idx:number) => (
+                            selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
                                 <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
                                     <JohnDotsLine />
                                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
