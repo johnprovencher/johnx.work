@@ -33,11 +33,14 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     const [selectedToken, setSelectedToken] = useState<null| any>(null)
 
     useEffect(() => {
-        if (traitsdataArray) { 
+        if (traitsdataArray !== null && traitsdataArray !== undefined) { 
             console.log('traitsdataArray: ' + traitsdataArray)
             let firstToken = traitsdataArray[0].data as any
-            console.log('first Token: ' + traitsdataArray[0].data.traits[0].value)
-            setSelectedToken(firstToken)
+
+            if (firstToken !== null && firstToken !== undefined) { 
+                console.log('first Token: ' + traitsdataArray[0].data.traits[0].value)
+                setSelectedToken(firstToken)
+            }
         }
     }, [traitsdataArray])
 
