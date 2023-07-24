@@ -33,13 +33,9 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     const [selectedToken, setSelectedToken] = useState<null| any>(null)
 
     useEffect(() => {
-        if (traitsdataArray !== null && traitsdataArray !== undefined) { 
-            console.log('traitsdataArrayy: ' + traitsdataArray)
+        if (traitsdataArray) { 
             let firstToken = traitsdataArray[0].data as any
-
-            if (firstToken !== null && firstToken !== undefined) {
-                setSelectedToken(firstToken)
-            }
+            setSelectedToken(firstToken)
         }
     }, [traitsdataArray])
 
@@ -225,7 +221,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         </Box>
                         <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
                             {
-                                selectedToken && selectedToken !== undefined && (
+                                selectedToken && (
                                     <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
                                 )
                             }
@@ -233,14 +229,14 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Box>
                     <Box sx={{width: '100%', px: '2em'}}>
                         {
-                            selectedToken && selectedToken !== undefined && (
+                            selectedToken && (
                                 <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                             )
                         }
                     </Box>
                     <Box>
                         {
-                            selectedToken && selectedToken.traits && selectedToken.traits.map((trait:Trait, idx:number) => (
+                            selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
                                 <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
                                     <JohnDotsLine />
                                     <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
@@ -258,7 +254,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             live view
                         </JohnBox>
                         <JohnBox onClick={ () =>
-                            window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${ (selectedToken && selectedToken !== undefined) ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
+                            window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
                         }>
                             opensea
                         </JohnBox>
