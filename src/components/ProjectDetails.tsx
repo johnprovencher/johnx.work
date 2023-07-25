@@ -17,6 +17,8 @@ import { Trait } from "utils/types"
 import { useEffect, useState } from "react"
 import useTokenTraitsBatch from "hooks/useTokenTraitsBatch"
 import { isUsingTestnet } from "utils/contractInfoHelper"
+import MintingInterfaceFilter from "./MintingInterfaceFilter"
+import MinterSetPriceV4Interface from "./MinterInterfaces/MinterSetPriceV4Interface"
 
 interface Props {
   contractAddress: string
@@ -124,8 +126,15 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             </Typography> 
                             <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
                         </Box>
-                        <JohnBox>
-                            { `mint ${project.pricePerTokenInWei} eth`}  
+                        <JohnBox isContainer={true}>
+                            <MinterSetPriceV4Interface 
+                                coreContractAddress={getContractConfigByAddress(contractAddress)?.CORE_CONTRACT_ADDRESS!}
+                                mintContractAddress={getContractConfigByAddress(contractAddress)?.MINT_CONTRACT_ADDRESS!}
+                                projectId={project.projectId}
+                                artistAddress={project.artistAddress}
+                                scriptAspectRatio={project.aspectRatio}
+                            />
+                            {/* { `mint ${project.pricePerTokenInWei} eth`} */}
                         </JohnBox>
                     </Box>
                 </Box>
@@ -135,7 +144,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             <JohnDotsLine />
                             <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
                                 <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
-                                editions size
+                                    editions size
                                 </Typography>
                                 <Typography fontSize={16} fontWeight={800} sx={{backgroundColor: "black"}}>
                                     { project.maxInvocations.toString() }

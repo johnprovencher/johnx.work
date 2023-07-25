@@ -82,38 +82,38 @@ const MinterSetPriceV4Interface = (
     const anyoneCanMint = isNotArtist && priceIsConfigured && !isSoldOut && !isPaused
 
     return (
-        <Box>
-            <MintingProgress
-                invocations={invocations}
-                maxInvocations={maxInvocations}
-                maxHasBeenInvoked={maxHasBeenInvoked}
-            />
-            {
-                priceIsConfigured &&
-        (
-            <MintingPrice
-                startPriceWei={currentPriceWei}
-                currentPriceWei={currentPriceWei}
-                endPriceWei={currentPriceWei}
-                currencySymbol={currencySymbol}
-            />
-        )
-            }
-            <MinterSetPriceV4Button
-                coreContractAddress={coreContractAddress}
-                mintContractAddress={mintContractAddress}
-                projectId={projectId}
-                priceWei={currentPriceWei}
-                currencySymbol={currencySymbol}
-                isConnected={account.isConnected}
-                artistCanMint={artistCanMint}
-                anyoneCanMint={anyoneCanMint}
-                scriptAspectRatio={scriptAspectRatio}
-                verifyBalance={balance?.data?.formatted! >= utils.formatEther(projectPriceInfo.tokenPriceInWei.toString())}
-                isPaused={isPaused}
-                isSoldOut={isSoldOut}
-            />
-        </Box>
+        // <Box>
+        //     <MintingProgress
+        //         invocations={invocations}
+        //         maxInvocations={maxInvocations}
+        //         maxHasBeenInvoked={maxHasBeenInvoked}
+        //     />
+        //     {
+        //         priceIsConfigured &&
+        // (
+        //     <MintingPrice
+        //         startPriceWei={currentPriceWei}
+        //         currentPriceWei={currentPriceWei}
+        //         endPriceWei={currentPriceWei}
+        //         currencySymbol={currencySymbol}
+        //     />
+        // )
+        //     }
+        <MinterSetPriceV4Button
+            coreContractAddress={coreContractAddress}
+            mintContractAddress={mintContractAddress}
+            projectId={projectId}
+            priceWei={currentPriceWei}
+            currencySymbol={currencySymbol}
+            isConnected={account.isConnected}
+            artistCanMint={artistCanMint}
+            anyoneCanMint={anyoneCanMint}
+            scriptAspectRatio={scriptAspectRatio}
+            verifyBalance={balance?.data?.formatted! >= utils.formatEther(projectPriceInfo.tokenPriceInWei.toString())}
+            isPaused={isPaused}
+            isSoldOut={isSoldOut}
+        />
+        // </Box>
     )
 }
 

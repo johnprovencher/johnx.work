@@ -97,17 +97,17 @@ const MinterSetPriceV4Button = (
     else if (!verifyBalance) mintingMessage = "insufficient funds"
 
     return (
-        <>
+        <Box>
             <MintingButton
                 disabled={mintingDisabled && !artistCanMint}
                 message={mintingMessage}
                 contractPurchase={write}
             />
-            <Box marginTop={1}>
+            {/* <Box marginTop={1}>
                 <Typography fontStyle="italic">
                     {dialog}
                 </Typography>
-            </Box>
+            </Box> */}
             <Modal
                 open={mintingPreview}
                 onClose={handleMintingPreviewClose}
@@ -141,7 +141,7 @@ const MinterSetPriceV4Button = (
                     </Box>
                 </Box>
             </Modal>
-        </>
+        </Box>
     )
 }
 

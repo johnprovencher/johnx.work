@@ -204,7 +204,7 @@ const GenArt721MinterButton = (
                 }}>
                     <Box sx={{display: "grid", justifyContent: "center", alignItems: "center" }}>
                         <Typography id="modal-modal-title" variant="h1" fontSize="18px">
-              Minted #{mintingTokenId}
+                            Minted #{mintingTokenId}
                         </Typography>
                         <Box marginTop={1}>
                             <TokenView

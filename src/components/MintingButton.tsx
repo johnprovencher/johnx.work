@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material"
+import { Button, Box, Typography } from "@mui/material"
 
 interface Props {
   disabled: boolean,
@@ -8,13 +8,12 @@ interface Props {
 
 const MintingButton = ({disabled, message, contractPurchase}: Props) => {
     return (
-        <Button
-            variant="contained"
+        <Box
             color="primary"
-            disabled={disabled}
             onClick={() => contractPurchase?.()}
             sx={{
-                minWidth: "210px",
+                cursor: 'pointer',
+                textAlign: 'center',
                 paddingTop: 1.5,
                 paddingRight: 1,
                 paddingLeft: 1,
@@ -25,7 +24,7 @@ const MintingButton = ({disabled, message, contractPurchase}: Props) => {
             <Typography fontSize={16} fontWeight={800}>
                 {message}
             </Typography>
-        </Button>
+        </Box>
     )
 }
 
