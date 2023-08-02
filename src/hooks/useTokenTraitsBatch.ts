@@ -21,8 +21,12 @@ const useTokenTraitsBatch = (contractAddress: string, tokens: Token[]):
                 const tokenUrl = contractConfig?.TOKEN_URL
                 const results = await Promise.all(
                     tokens.map( async (token) => {
+                        console.log(`${tokenUrl}/${contractAddress}/${token.tokenId}`)
                         const result = await axios.get(`${tokenUrl}/${contractAddress}/${token.tokenId}`)
-                        return result
+                        return {
+                            tokenID: result.data.tokenID,
+                            traits: result.data.traits
+                        }
                     })
                 )
                 setDataArray(results)
