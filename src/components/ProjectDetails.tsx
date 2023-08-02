@@ -26,7 +26,7 @@ interface Props {
 }
 
 const ProjectDetails = ({ contractAddress, id }: Props) => {
-    const { loading, error, data } = useProject(`${contractAddress}-${id}`)
+    const { loading, error, data, refetch } = useProject(`${contractAddress}-${id}`)
     const project = data?.project
     const contractConfig = getContractConfigByAddress(contractAddress)
     const projectIsLive = false
@@ -36,8 +36,9 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     useEffect(() => {
         if (traitsdataArray) { 
-            let firstToken = traitsdataArray[0].data as any
+            let firstToken = traitsdataArray[0] as any
             setSelectedToken(firstToken)
+            console.log('traitsdataArray: ' + JSON.stringify(traitsdataArray))
         }
     }, [traitsdataArray])
 
@@ -95,7 +96,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
 
     return project && contractConfig && (
-        <Box sx={{px: '24px', maxWidth:'1400px'}}>
+        <Box sx={{px: '24px', maxWidth:'1400px', margin: '0 auto'}}>
             <Box sx={{width:'52%', margin:'auto', paddingBottom: '4em'}}>
                 {
                     project.tokens && (
@@ -133,8 +134,8 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                                 projectId={project.projectId}
                                 artistAddress={project.artistAddress}
                                 scriptAspectRatio={project.aspectRatio}
+                                didEndPurchaseTransaction={()=>{refetch()}}
                             />
-                            {/* { `mint ${project.pricePerTokenInWei} eth`} */}
                         </JohnBox>
                     </Box>
                 </Box>
@@ -205,22 +206,26 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Typography>
                 </Box>
             </Box>
-            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridAutoRows:'1fr', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
                 '@media screen and (max-width: 465px)': {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 }
             }}>
-                <Box sx={{ gridColumnStart: '1', gridColumnEnd: '3', display: 'inline-flex', flexDirection: 'column', gap: '1em' }}>
+                <Box sx={{ position: 'relative', gridColumnStart: '1', gridColumnEnd: '3', display: 'inline-flex', flexDirection: 'column', gap: '1em' }}>
                     {
                         traitsdataArray && (
-                            <ProjectMetadataRow isHeader={true} tokenData={traitsdataArray[0].data} />
+                            <ProjectMetadataRow isHeader={true} tokenData={traitsdataArray[0]} />
                         )
                     }
-                    {
-                        traitsdataArray?.map((tokenData:any, idx:number) => (
-                            <ProjectMetadataRow key={idx} tokenData={tokenData.data} />
-                        ))
-                    }
+                    <Box sx={{ position: 'relative', height: '100%' }}>
+                        <Box sx={{ position: 'absolute', display: 'inline-flex', flexDirection: 'column', gap: '1em', overflowY: 'auto', height: '100%', width: '100%' }}>
+                            {
+                                traitsdataArray && traitsdataArray?.map((tokenData:any, idx:number) => (
+                                    <ProjectMetadataRow key={idx} tokenData={tokenData} />
+                                ))
+                            }
+                        </Box>
+                    </Box>
                 </Box>
                 <Box sx={{ display: 'inline-flex', flexDirection: 'column', gap: '1em'}}>
                     <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>

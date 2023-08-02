@@ -13,7 +13,9 @@ interface Props {
   mintContractAddress: string,
   projectId: string,
   artistAddress: string,
-  scriptAspectRatio: number
+  scriptAspectRatio: number,
+  didEndPurchaseTransaction?: () => void
+
 }
 
 const MinterSetPriceV4Interface = (
@@ -22,7 +24,8 @@ const MinterSetPriceV4Interface = (
         mintContractAddress,
         projectId,
         artistAddress,
-        scriptAspectRatio
+        scriptAspectRatio,
+        didEndPurchaseTransaction
     }: Props
 ) => {
 
@@ -112,6 +115,7 @@ const MinterSetPriceV4Interface = (
             verifyBalance={balance?.data?.formatted! >= utils.formatEther(projectPriceInfo.tokenPriceInWei.toString())}
             isPaused={isPaused}
             isSoldOut={isSoldOut}
+            didEndPurchaseTransaction={didEndPurchaseTransaction}
         />
         // </Box>
     )

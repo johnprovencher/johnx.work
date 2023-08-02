@@ -8,6 +8,8 @@ import MinterMerkleV5ABI from "abi/V3/MinterMerkleV5.json"
 import TokenView from "components/TokenView"
 import useWindowSize from "hooks/useWindowSize"
 import MintingButton from "components/MintingButton"
+import TokenImage from "components/TokenImage"
+import { parseAspectRatio } from "utils/scriptJSON"
 
 interface Props {
   coreContractAddress: string,
@@ -21,7 +23,8 @@ interface Props {
   scriptAspectRatio: number,
   verifyBalance: boolean,
   isPaused: boolean,
-  isSoldOut: boolean
+  isSoldOut: boolean,
+  didEndPurchaseTransaction?: () => void
 }
 
 const MinterSetPriceV4Button = (
@@ -37,7 +40,8 @@ const MinterSetPriceV4Button = (
         scriptAspectRatio,
         verifyBalance,
         isPaused,
-        isSoldOut
+        isSoldOut,
+        didEndPurchaseTransaction
     }: Props
 ) => {
     const windowSize = useWindowSize()
@@ -72,7 +76,7 @@ const MinterSetPriceV4Button = (
         ...config,
         request: customRequest,
         onSuccess() {
-            setDialog("Transaction pending...")
+            setDialog("Tx pending...")
         }
     })
 
@@ -82,10 +86,15 @@ const MinterSetPriceV4Button = (
         onSuccess(data) {
             let tokenId = data?.logs[0]?.topics[3]
             if (tokenId) {
-                setMintingTokenId(parseInt(tokenId, 16).toString())
-                handleMintingPreviewOpen()
+                console.log('before timer')
+                setTimeout(() => {
+                    setMintingTokenId(parseInt(tokenId, 16).toString())
+                    handleMintingPreviewOpen()
+                    didEndPurchaseTransaction?.()
+                    console.log('after timer')
+                    setDialog("")
+                }, 3000);
             }
-            setDialog("")
         }
     })
 
@@ -100,19 +109,13 @@ const MinterSetPriceV4Button = (
         <Box>
             <MintingButton
                 disabled={mintingDisabled && !artistCanMint}
-                message={mintingMessage}
+                message={ dialog !== "" ? dialog : mintingMessage }
                 contractPurchase={write}
             />
-            {/* <Box marginTop={1}>
-                <Typography fontStyle="italic">
-                    {dialog}
-                </Typography>
-            </Box> */}
             <Modal
                 open={mintingPreview}
                 onClose={handleMintingPreviewClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                sx={{outline: 0}}
             >
                 <Box sx={{
                     position: "absolute",
@@ -120,23 +123,23 @@ const MinterSetPriceV4Button = (
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     width: "75%",
-                    bgcolor: "white",
-                    border: "none",
+                    bgcolor: "black",
+                    border: "white solid 1px",
                     boxShadow: 10,
-                    padding: 5
+                    padding: 5,
+                    outline: 0
                 }}>
                     <Box sx={{display: "grid", justifyContent: "center", alignItems: "center" }}>
-                        <Typography id="modal-modal-title" variant="h1" fontSize="18px">
-              Minted #{mintingTokenId}
+                        <Typography>
+                            Minted token{mintingTokenId}
                         </Typography>
-                        <Box marginTop={1}>
-                            <TokenView
-                                contractAddress={coreContractAddress}
-                                tokenId={mintingTokenId}
-                                width={windowSize.width*0.5}
-                                aspectRatio={scriptAspectRatio}
-                                live
-                            />
+                        <Box marginTop={1} sx={{position: 'relative'}}>
+                            <Box sx={{border: "white solid 1px", position: "absolute", top: 0, left: 0, width: '100%', height: '100%', display: "grid", justifyContent: "center", alignItems: "center" }}>
+                                <Typography>
+                                    Image loading...
+                                </Typography>
+                            </Box>
+                            <TokenImage contractAddress={coreContractAddress} tokenId={mintingTokenId} aspectRatio={scriptAspectRatio} />
                         </Box>
                     </Box>
                 </Box>
