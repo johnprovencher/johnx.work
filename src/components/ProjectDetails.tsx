@@ -206,7 +206,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     </Typography>
                 </Box>
             </Box>
-            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridAutoRows:'1fr', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
                 '@media screen and (max-width: 465px)': {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 }
@@ -217,61 +217,59 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             <ProjectMetadataRow isHeader={true} tokenData={traitsdataArray[0]} />
                         )
                     }
-                    <Box sx={{ position: 'relative', height: '100%' }}>
-                        <Box sx={{ position: 'absolute', display: 'inline-flex', flexDirection: 'column', gap: '1em', overflowY: 'auto', height: '100%', width: '100%' }}>
-                            {
-                                traitsdataArray && traitsdataArray?.map((tokenData:any, idx:number) => (
-                                    <ProjectMetadataRow key={idx} tokenData={tokenData} />
-                                ))
-                            }
-                        </Box>
-                    </Box>
+                    {
+                        traitsdataArray && traitsdataArray?.map((tokenData:any, idx:number) => (
+                            <ProjectMetadataRow key={idx} tokenData={tokenData} />
+                        ))
+                    }
                 </Box>
-                <Box sx={{ display: 'inline-flex', flexDirection: 'column', gap: '1em'}}>
-                    <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
-                        <JohnDotsLine />
-                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> item number </Typography>
+                <Box sx={{ position: 'relative', width: '100%', height: '100%'}}>
+                    <Box sx={{ position: 'sticky', width: '100%', top: 0, display: 'inline-flex', flexDirection: 'column', gap: '1em'}}>
+                        <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
+                            <JohnDotsLine />
+                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                <Typography sx={{position: 'relative', backgroundColor: 'black' }}> item number </Typography>
+                            </Box>
+                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
+                                {
+                                    selectedToken && (
+                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
+                                    )
+                                }
+                            </Box>
                         </Box>
-                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
+                        <Box sx={{width: '100%', px: '2em'}}>
                             {
                                 selectedToken && (
-                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
+                                    <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                                 )
                             }
                         </Box>
-                    </Box>
-                    <Box sx={{width: '100%', px: '2em'}}>
-                        {
-                            selectedToken && (
-                                <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
-                            )
-                        }
-                    </Box>
-                    <Box>
-                        {
-                            selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
-                                <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
-                                    <JohnDotsLine />
-                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
+                        <Box>
+                            {
+                                selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
+                                    <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
+                                        <JohnDotsLine />
+                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
+                                        </Box>
+                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
+                                        </Box>
                                     </Box>
-                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
-                                    </Box>
-                                </Box>
-                            ))
-                        }
-                    </Box>
-                    <Box sx={{ display: 'inline-flex', gap:'8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
-                        <JohnBox onClick={() => window.location.href="www.google.com" }>
-                            live view
-                        </JohnBox>
-                        <JohnBox onClick={ () =>
-                            window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
-                        }>
-                            opensea
-                        </JohnBox>
+                                ))
+                            }
+                        </Box>
+                        <Box sx={{ display: 'inline-flex', gap:'8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
+                            <JohnBox onClick={() => window.location.href="www.google.com" }>
+                                live view
+                            </JohnBox>
+                            <JohnBox onClick={ () =>
+                                window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
+                            }>
+                                opensea
+                            </JohnBox>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
