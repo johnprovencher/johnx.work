@@ -21,7 +21,7 @@ const MintingButton = ({disabled, message, contractPurchase}: Props) => {
                 boxShadow: "none",
                 textTransform: "none"
             }}>
-            <Typography fontSize={16} fontWeight={800}>
+            <Typography fontSize={14} fontWeight={800}>
                 {message}
             </Typography>
         </Box>

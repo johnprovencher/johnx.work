@@ -48,8 +48,8 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     }
 
     const ProjectMetadataRow = ({isHeader=false, tokenData}: RowProps) => (
-        <Box sx={{ display: 'flex', width: '100%', gap: '2em', color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(tokenData) { setSelectedToken(tokenData) } }} >
-            <Box sx={{position: 'relative', textAlign: 'center', width: '50px'}}>
+        <Box className="row" sx={{ display: 'flex', width: '100%', gap: '1em',  paddingTop: `${isHeader ? '5px' : ''}`, color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(tokenData) { setSelectedToken(tokenData) } }} >
+            <Box sx={{position: 'relative', textAlign: 'center', width: '35px'}}>
                 {
                     isHeader ? 
                         (
@@ -63,12 +63,12 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
             </Box>
             {
                 tokenData && tokenData.traits && (
-                    <Box sx={{ display: 'grid', flex: 1, gap: '2em', gridTemplateColumns: `repeat(${tokenData.traits.length}, 1fr)` }}>
+                    <Box sx={{ display: 'grid', flex: 1, gap: '6px', alignItems: 'center', gridTemplateColumns: `repeat(${tokenData.traits.length}, 1fr)` }}>
                         {
                             tokenData.traits.map((trait:any, idx:number) => (
                                 <Box key={idx} sx={{position: 'relative'}}>
                                     <JohnDotsLine />
-                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingRight:"6px"}}>
                                         <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ isHeader ? trait.trait_type : trait.value } </Typography>
                                     </Box>
                                 </Box>
@@ -96,7 +96,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
 
     return project && contractConfig && (
-        <Box sx={{px: '24px', maxWidth:'1400px', margin: '0 auto'}}>
+        <Box sx={{px: '24px', maxWidth:'10400px', margin: '0 auto'}}>
             <Box sx={{width:'52%', margin:'auto', paddingBottom: '4em'}}>
                 {
                     project.tokens && (
@@ -120,10 +120,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         <Typography>title</Typography>
                         <Typography>release date</Typography>
                     </Box>
-                    <Box sx={{display: 'flex', gap: '4px', justifyContent: 'space-between'}}> 
+                    <Box sx={{display: 'flex', gap: '4px', justifyContent: 'space-between', alignItems: "center"}}> 
                         <Box sx={{display: 'inline-flex', gap: '4px'}}> 
-                            <Typography fontSize={16} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
-                                <span>{project.invocations.toString()}/{project.maxInvocations.toString()}</span>
+                            <Typography fontSize={14} fontWeight={800} pr={'4px'} sx={{backgroundColor: 'black'}}>
+                                <span>({project.invocations.toString()}/{project.maxInvocations.toString()})</span>
                             </Typography> 
                             <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
                         </Box>
@@ -144,10 +144,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
                             <JohnDotsLine />
                             <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
-                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
                                     editions size
                                 </Typography>
-                                <Typography fontSize={16} fontWeight={800} sx={{backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{backgroundColor: "black", paddingLeft:"6px"}}>
                                     { project.maxInvocations.toString() }
                                 </Typography>
                             </Box>
@@ -155,10 +155,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
                             <JohnDotsLine />
                             <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
-                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
                                 mint price
                                 </Typography>
-                                <Typography fontSize={16} fontWeight={800} sx={{backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{backgroundColor: "black", paddingLeft:"6px"}}>
                                     { `${project.pricePerTokenInWei.toString()}eth` }
                                 </Typography>
                             </Box>
@@ -166,47 +166,47 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         <Box sx={{position: 'relative', color: "rgba(255,255,255,0.5)" }}> 
                             <JohnDotsLine />
                             <Box sx={{display: 'flex', justifyContent: 'space-between'}}> 
-                                <Typography fontSize={16} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{pr:'6px', backgroundColor: "black"}}>
                                 medium
                                 </Typography>
-                                <Typography fontSize={16} fontWeight={800} sx={{backgroundColor: "black"}}>
+                                <Typography fontSize={14} fontWeight={800} sx={{backgroundColor: "black", paddingLeft:"6px"}}>
                                     { `question mark` }
                                 </Typography>
                             </Box>
                         </Box>
                     </Box>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                         { project.description}
                     </Typography>
                 </Box>
                 <Box>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1512 johnx.eth connected
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1507 johnx.eth minted
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1512 johnx.eth minted
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1421 johnx.eth connected
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1432 johnx.eth connected
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1512 johnx.eth connected
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1507 johnx.eth minted
                     </Typography>
-                    <Typography fontSize={16} fontWeight={800}>
+                    <Typography fontSize={14} fontWeight={800}>
                     ? 1512 johnx.eth minted
                     </Typography>
                 </Box>
             </Box>
-            <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+            <Box sx={{ display: 'grid', position: 'relative', gridGap: '1em', paddingBottom: '4em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
                 '@media screen and (max-width: 465px)': {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 }
@@ -224,13 +224,13 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                     }
                 </Box>
                 <Box sx={{ position: 'relative', width: '100%', height: '100%'}}>
-                    <Box sx={{ position: 'sticky', width: '100%', top: 0, display: 'inline-flex', flexDirection: 'column', gap: '1em'}}>
-                        <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
+                    <Box sx={{ position: 'sticky', width: '100%', top: 0, display: 'inline-flex', flexDirection: 'column', gap: '1em', paddingTop: '5px'}}>
+                        <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
                             <JohnDotsLine />
                             <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                <Typography sx={{position: 'relative', backgroundColor: 'black' }}> item number </Typography>
+                                <Typography sx={{position: 'relative', backgroundColor: 'black', paddingRight:"6px" }}> item number </Typography>
                             </Box>
-                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white'}}>
+                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white', paddingLeft:"6px"}}>
                                 {
                                     selectedToken && (
                                         <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
@@ -238,37 +238,37 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                                 }
                             </Box>
                         </Box>
-                        <Box sx={{width: '100%', px: '2em'}}>
+                        <Box sx={{width: '100%', px: '0'}}>
                             {
                                 selectedToken && (
                                     <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
                                 )
                             }
                         </Box>
-                        <Box>
-                            {
-                                selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
-                                    <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '2em', justifyContent: 'space-between' }}>
-                                        <JohnDotsLine />
-                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
-                                        </Box>
-                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
-                                        </Box>
-                                    </Box>
-                                ))
-                            }
-                        </Box>
-                        <Box sx={{ display: 'inline-flex', gap:'8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
+                        <Box sx={{ display: 'inline-flex', gap:'10px', padding: '10px 0px 8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
                             <JohnBox onClick={() => window.location.href="www.google.com" }>
-                                live view
+                                fullscreen
                             </JohnBox>
                             <JohnBox onClick={ () =>
                                 window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
                             }>
                                 opensea
                             </JohnBox>
+                        </Box>
+                        <Box sx={{paddingBottom:'14px',}}>
+                            {
+                                selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
+                                    <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', justifyContent: 'space-between' }}>
+                                        <JohnDotsLine />
+                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingRight: "6px"}}>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
+                                        </Box>
+                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingLeft: "6px"}}>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
+                                        </Box>
+                                    </Box>
+                                ))
+                            }
                         </Box>
                     </Box>
                 </Box>

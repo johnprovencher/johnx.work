@@ -62,9 +62,8 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: [
-            "Superstudio-Regular",
-            "Arial",
-            "sans-serif"
+            "Superstudio",
+            "monospace"
         ].join(",")
     },
     components: {

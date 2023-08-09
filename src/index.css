@@ -1,19 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap");
 
-@font-face {
-    font-family: "Superstudio-Light";
-    src: url("./fonts/SuperstudioLLTrialWeb-Light.woff2") format("woff2");
-}
-  
-@font-face {
-    font-family: "Superstudio-Regular";
-    src: url("./fonts/SuperstudioLLTrialWeb-Regular.woff2") format("woff2");
-}
 
 @font-face {
     font-family: "Superstudio-Bold";
     src: url("./fonts/SuperstudioLLTrialWeb-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Superstudio";
+    src: url("./fonts/superstudio-heavy.woff") format("woff");
 }
 
 body {
@@ -28,15 +24,138 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-a, a:visited {
+a,
+a:visited {
     color: "black";
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .mobile-link:hover {
     text-decoration: none;
+}
+
+* {
+    font-size: 14px !important;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    letter-spacing: -.2px !important;
+    line-height: 1.5 !important;
+    text-transform: lowercase !important;
+}
+
+.small {
+    font-size: 11px !important;
+    line-height: 14.3px !important;
+    letter-spacing: .4px !important;
+    text-transform: uppercase !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+.css-1d4utl3 {
+    background-color: transparent !important;
+}
+
+.css-13xceug {
+    padding: .6em 0 1em !important;
+}
+
+.css-79elbk {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.css-1hcian4 {
+    gap: 10px !important;
+}
+
+.css-0 {}
+
+.css-1xjdue5 *:not(.css-t0nj7o-MuiTypography-root) {
+    font-size: 11px !important;
+    letter-spacing: .4px !important;
+    text-transform: uppercase !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+.css-u7xxrs {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .5) !important;
+    border: none !important;
+    padding: 30px 0px !important;
+    box-shadow: 1px 1px 25px rgba(90, 90, 90, .7) !important;
+    width: 40vw !important;
+}
+
+.css-1mmxvir * {
+    text-align: center;
+    font-size: 11px !important;
+    letter-spacing: .4px !important;
+    text-transform: uppercase !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    color: white;
+
+
+}
+
+.css-1mmxvir div {
+    width: 30vw !important;
+    height: 30vw !important;
+    border: none;
+
+
+}
+
+.row:hover {
+    outline: 1px dotted rgba(255, 255, 255, .5);
+}
+
+.orb {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0px 0px;
+    z-index: 2147483647;
+    background-color: #000;
+    cursor: pointer;
+    border-radius: 100%;
+    transform: rotate(-20deg);
+    box-shadow: 0px 0px 22px rgba(90, 90, 90, 0.65);
+    transition: opacity .35s ease;
+}
+
+
+#orb:hover {
+    box-shadow: 0px 0px 22px rgba(90, 90, 90, 0.8);
+}
+
+
+.orb:after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: calc(70%);
+    height: 55%;
+    background: linear-gradient(rgba(255, 255, 255, .95), rgba(255, 255, 255, .0), rgba(255, 255, 255, .0));
+    filter: blur(5px);
+    border-radius: 100%;
+
+}
+
+.boxButton {
+    cursor: pointer !important;
+}
+
+
+
+.boxButton:hover .dots {
+    background-color: rgba(255, 255, 255, .8);
 }

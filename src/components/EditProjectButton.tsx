@@ -26,7 +26,7 @@ const EditProjectButton = ({contractAddress, projectId, editProjectUrl}: Props) 
                 boxShadow: "none",
                 textTransform: "none"
             }}>
-            <Typography fontSize={16} fontWeight={800}>
+            <Typography fontSize={14} fontWeight={800}>
                 {"Edit Project"}
             </Typography>
         </Button>

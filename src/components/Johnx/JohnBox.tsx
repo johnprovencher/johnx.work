@@ -16,10 +16,10 @@ interface ScrewProps {
 }
 
 const Screw = ({ top, left, bottom, right }:ScrewProps) => (
-    <Box
+    <Box className="dots"
         sx={{
             position: "absolute",
-            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            backgroundColor: "rgba(255, 255, 255, .2)",
             borderRadius: "2px",
             width: "4px",
             height: "4px",
@@ -33,7 +33,7 @@ const Screw = ({ top, left, bottom, right }:ScrewProps) => (
 
 const JohnBox = ({isContainer=false, onClick, style, children}: Props) => {
     return (
-        <Box onClick={onClick} sx={{ cursor: `${onClick ? 'pointer' : ''}`, position: 'relative', height: '33.5px', alignItems: 'center', display: 'inline-flex', backgroundColor: '#333333', borderRadius:'4px'}} style={style}>
+        <Box className="boxButton" onClick={onClick} sx={{ cursor: `${onClick ? 'pointer' : ''}`, position: 'relative', height: '33.5px', alignItems: 'center', display: 'inline-flex', backgroundColor: 'rgba(95, 95, 95, .5)', borderRadius:'4px'}} style={style}>
             <Box style={{height: '100%', width: '12px'}}>
                 <Screw top='4px' left='4px' />
                 <Screw bottom='4px' left='4px' />
@@ -47,7 +47,7 @@ const JohnBox = ({isContainer=false, onClick, style, children}: Props) => {
             }
             {
                 !isContainer && (
-                    <Typography fontSize={16} fontWeight={800} sx={{ px: 1 }}>
+                    <Typography fontSize={14} fontWeight={800} sx={{ px: 1 }}>
                         {children}
                     </Typography>
                 )

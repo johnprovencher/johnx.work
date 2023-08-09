@@ -99,10 +99,10 @@ const MinterSetPriceV4Button = (
     })
 
     const mintingDisabled = isPaused || isSoldOut || !isConnected || !verifyBalance
-    let mintingMessage = `${artistCanMint ? "Artist Mint " : "Purchase "} for ${formatEtherFixed(priceWei.toString(), 3)} ${currencySymbol}`
+    let mintingMessage = `${artistCanMint ? "" : "Purchase "} ${formatEtherFixed(priceWei.toString(), 3)} ${currencySymbol}`
     if (isPaused && !artistCanMint) mintingMessage = "minting paused"
     else if (isSoldOut) mintingMessage = "sold out"
-    else if (!isConnected) mintingMessage = "connect to purchase"
+    else if (!isConnected) mintingMessage = "connect to mint"
     else if (!verifyBalance) mintingMessage = "insufficient funds"
 
     return (

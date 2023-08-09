@@ -9,17 +9,16 @@ interface Props {
 const Header = ({children, transparent=false}: Props)=> {
 
     return (
-        <Box sx={{position: `${ transparent ? "fixed" : "sticky"}`, top: 0, left: 0, right: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: `${ transparent ? "transparent" : "black"}`, zIndex: 1}}>
-            <Box sx={{px: '24px', width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between"}}>
+        <Box sx={{position: `${ transparent ? "absolute" : "inherit"}`, top: 0, left: 0, right: 0, width: "100%", display: "flex", justifyContent: "center", backgroundColor: `${ transparent ? "transparent" : "transparent"}`, zIndex: 1, marginTop: "0px", marginBottom: "20px" }}>
+            <Box sx={{px: '0px', width: "100%", minHeight: "100px", display: "flex", margin: "auto", justifyContent: "space-between"}}>
                 <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <Box sx={{px: 2 }}>
-                        <Link href="/" sx={{display: "flex"}}>
-                            <img src="/media/johnx.jpg" alt="johnx" height={54} style={{borderRadius: "50%", border: "1px solid rgba(255, 255, 255, 0.4)", boxShadow: `${ transparent ? '0px 0px 13px 1px #ffffff' : ''}` }}></img>
+                    <Box sx={{px:3}}>
+                        <Link className="orb" href="/" sx={{display: "flex"}}>
                         </Link>
                     </Box>
                     { children }
                 </Box>
-                <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 2}}>
+                <Box display="flex" alignItems="center" justifyContent="center" sx={{px: 3}}>
                     <Connect/>
                 </Box>
             </Box>

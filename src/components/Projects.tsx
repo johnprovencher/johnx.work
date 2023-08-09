@@ -9,7 +9,7 @@ const Projects = () => {
     const { loading, error, data } = useProjects()
 
     return (
-        <Box sx={{px: '24px', maxWidth:'1400px', margin: '0 auto'}}>
+        <Box sx={{px: '24px', maxWidth:'2000px', margin: '0 auto'}}>
             <Box>
                 {
                     loading ?
@@ -30,7 +30,7 @@ const Projects = () => {
                             :
                             data?.projects?.length > 0 ?
                                 (
-                                    <Box sx={{ display: 'grid', position: 'relative', gridGap: '2em', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+                                    <Box sx={{ display: 'grid', position: 'relative', marginTop:"0px", gridGap: '1.25em', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
                                         '@media screen and (max-width: 465px)': {
                                             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                                         }
@@ -41,7 +41,6 @@ const Projects = () => {
                                                     <ProjectPreview
                                                         key={idx}
                                                         project={project}
-                                                        showDescription
                                                     />
                                                 ))
                                             )
@@ -52,7 +51,6 @@ const Projects = () => {
                                                     <ProjectPreview
                                                         key={idx}
                                                         project={project}
-                                                        showDescription
                                                     />
                                                 ))
                                             )
@@ -63,7 +61,6 @@ const Projects = () => {
                                                     <ProjectPreview
                                                         key={idx}
                                                         project={project}
-                                                        showDescription
                                                     />
                                                 ))
                                             )
