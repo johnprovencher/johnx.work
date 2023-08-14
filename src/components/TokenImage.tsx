@@ -12,18 +12,13 @@ const TokenImage = ({contractAddress, tokenId, aspectRatio}: Props) => {
     const paddingtTop = aspectRatio ? ((1.0/aspectRatio) * 100) : 100
 
     return (
-        <Box sx={{ height: '100%', paddingTop: `${paddingtTop}%`, position: 'relative' }}>
-            <Box sx={{
-                backgroundImage: `url(${contractConfig?.MEDIA_URL}/${tokenId}.png)`,
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'none',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-            }} />
+        <Box sx={{ height: '100%', position: 'relative' }}>
+            <img
+                src={`${contractConfig?.MEDIA_URL}/${tokenId}.png`}
+                alt={tokenId}
+                width={'100%'}
+                height={'100%'}
+            />
         </Box>
     )
 }
