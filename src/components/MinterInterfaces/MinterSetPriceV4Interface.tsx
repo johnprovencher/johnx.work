@@ -12,6 +12,7 @@ interface Props {
   coreContractAddress: string,
   mintContractAddress: string,
   projectId: string,
+  projectTitle: string,
   artistAddress: string,
   scriptAspectRatio: number,
   didEndPurchaseTransaction?: () => void
@@ -23,6 +24,7 @@ const MinterSetPriceV4Interface = (
         coreContractAddress,
         mintContractAddress,
         projectId,
+        projectTitle,
         artistAddress,
         scriptAspectRatio,
         didEndPurchaseTransaction
@@ -106,6 +108,7 @@ const MinterSetPriceV4Interface = (
             coreContractAddress={coreContractAddress}
             mintContractAddress={mintContractAddress}
             projectId={projectId}
+            projectTitle={projectTitle}
             priceWei={currentPriceWei}
             currencySymbol={currencySymbol}
             isConnected={account.isConnected}

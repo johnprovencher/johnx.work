@@ -147,6 +147,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                                             coreContractAddress={getContractConfigByAddress(contractAddress)?.CORE_CONTRACT_ADDRESS!}
                                             mintContractAddress={getContractConfigByAddress(contractAddress)?.MINT_CONTRACT_ADDRESS!}
                                             projectId={project.projectId}
+                                            projectTitle={project.name}
                                             artistAddress={project.artistAddress}
                                             scriptAspectRatio={project.aspectRatio}
                                             didEndPurchaseTransaction={()=>{refetch()}}

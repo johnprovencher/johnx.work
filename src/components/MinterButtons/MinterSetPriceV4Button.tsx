@@ -15,6 +15,7 @@ interface Props {
   coreContractAddress: string,
   mintContractAddress: string,
   projectId: string,
+  projectTitle: string,
   priceWei: BigNumber
   currencySymbol: string,
   isConnected: boolean,
@@ -32,6 +33,7 @@ const MinterSetPriceV4Button = (
         coreContractAddress,
         mintContractAddress,
         projectId,
+        projectTitle,
         priceWei,
         currencySymbol,
         isConnected,
@@ -131,7 +133,7 @@ const MinterSetPriceV4Button = (
                 }}>
                     <Box sx={{display: "grid", justifyContent: "center", alignItems: "center" }}>
                         <Typography>
-                            Minted token{mintingTokenId}
+                            {projectTitle} # {mintingTokenId}
                         </Typography>
                         <Box marginTop={1} sx={{position: 'relative'}}>
                             <Box sx={{border: "white solid 1px", position: "absolute", top: 0, left: 0, width: '100%', height: '100%', display: "grid", justifyContent: "center", alignItems: "center" }}>
