@@ -109,7 +109,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     return project && contractConfig && (
         <Box sx={{px: '24px', maxWidth:'10400px', margin: '0 auto'}}>
-            <Box sx={{width:'52%', margin:'auto', paddingBottom: '4em'}}>
+            <Box sx={{width: `${project.aspectRatio * 100}vh`, margin:'auto', paddingBottom: '4em'}}>
                 {
                     project.tokens && (
                         projectIsLive ?
