@@ -33,6 +33,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     const { dataArray: traitsdataArray } = useTokenTraitsBatch(contractAddress, project.tokens)
     const [selectedToken, setSelectedToken] = useState<null| any>(null)
+    const [lockSelectedToken, setLockSelectedToken] = useState<boolean>(false)
 
     useEffect(() => {
         if (traitsdataArray) { 
@@ -48,7 +49,15 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     }
 
     const ProjectMetadataRow = ({isHeader=false, tokenData}: RowProps) => (
-        <Box className="row" sx={{ display: 'flex', width: '100%', gap: '1em',  paddingTop: `${isHeader ? '5px' : ''}`, color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`}} onMouseOver={() => { if(tokenData) { setSelectedToken(tokenData) } }} >
+        <Box className={`${!isHeader ? "row" : ''}`}
+            sx={{ 
+                display: 'flex', width: '100%', gap: '1em',  paddingTop: `${isHeader ? '5px' : ''}`, cursor: `${!isHeader ? 'pointer' : ''}`, color: `${isHeader ? 'rgba(255,255,255,0.5)' : ''}`,
+                outline: `${!isHeader && tokenData === selectedToken ? '1px dotted rgba(255, 255, 255, .7) !important' : ''}`
+            }} 
+            onMouseOver={() => { if(tokenData && !lockSelectedToken) { setSelectedToken(tokenData) }}}
+            onMouseUp={() => { if (lockSelectedToken && tokenData === selectedToken) { setLockSelectedToken(false) } else { setSelectedToken(tokenData); setLockSelectedToken(true) } }}
+
+        >
             <Box sx={{position: 'relative', textAlign: 'center', width: '35px'}}>
                 {
                     isHeader ? 
