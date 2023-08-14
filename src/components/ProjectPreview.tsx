@@ -54,13 +54,18 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
                 </Box>
 
             </Box>
-            <TokenView
-                contractAddress={project.contract.id}
-                width={300}
-                tokenId={token?.tokenId}
-                invocation={token?.invocation}
-                aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)}
-            />
+            <Box 
+                sx={{cursor: 'pointer'}}
+                onClick={() => window.location.href = `/project/${project.contract.id}/${project.projectId}`}
+            >
+                <TokenView
+                    contractAddress={project.contract.id}
+                    width={300}
+                    tokenId={token?.tokenId}
+                    invocation={token?.invocation}
+                    aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)}
+                />
+            </Box>
             {
                 showDescription && (
                     <Box marginTop={2}>
