@@ -19,6 +19,8 @@ import useTokenTraitsBatch from "hooks/useTokenTraitsBatch"
 import { isUsingTestnet } from "utils/contractInfoHelper"
 import MintingInterfaceFilter from "./MintingInterfaceFilter"
 import MinterSetPriceV4Interface from "./MinterInterfaces/MinterSetPriceV4Interface"
+import { useAccount } from "wagmi"
+import Connect from "./Connect"
 
 interface Props {
   contractAddress: string
@@ -26,6 +28,7 @@ interface Props {
 }
 
 const ProjectDetails = ({ contractAddress, id }: Props) => {
+    const { isConnected } = useAccount()
     const { loading, error, data, refetch } = useProject(`${contractAddress}-${id}`)
     const project = data?.project
     const contractConfig = getContractConfigByAddress(contractAddress)
@@ -136,16 +139,24 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             </Typography> 
                             <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
                         </Box>
-                        <JohnBox isContainer={true}>
-                            <MinterSetPriceV4Interface 
-                                coreContractAddress={getContractConfigByAddress(contractAddress)?.CORE_CONTRACT_ADDRESS!}
-                                mintContractAddress={getContractConfigByAddress(contractAddress)?.MINT_CONTRACT_ADDRESS!}
-                                projectId={project.projectId}
-                                artistAddress={project.artistAddress}
-                                scriptAspectRatio={project.aspectRatio}
-                                didEndPurchaseTransaction={()=>{refetch()}}
-                            />
-                        </JohnBox>
+                        {
+                            isConnected ? 
+                                (
+                                    <JohnBox isContainer={true}>
+                                        <MinterSetPriceV4Interface 
+                                            coreContractAddress={getContractConfigByAddress(contractAddress)?.CORE_CONTRACT_ADDRESS!}
+                                            mintContractAddress={getContractConfigByAddress(contractAddress)?.MINT_CONTRACT_ADDRESS!}
+                                            projectId={project.projectId}
+                                            artistAddress={project.artistAddress}
+                                            scriptAspectRatio={project.aspectRatio}
+                                            didEndPurchaseTransaction={()=>{refetch()}}
+                                        />
+                                    </JohnBox>                                    
+                                ) : 
+                                (
+                                    <Connect/>
+                                )
+                        }
                     </Box>
                 </Box>
                 <Box>
