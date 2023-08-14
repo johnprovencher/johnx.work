@@ -32,7 +32,7 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
                     <JohnDots />
                     <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                         <Link href={`/project/${project.contract.id}/${project.projectId}`} underline="hover">
-                            <Typography fontSize={16} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
+                            <Typography fontSize={14} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
                                 {project.name}
                             </Typography>
                         </Link>
@@ -45,28 +45,14 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
                         }
                         {
                             !project.minterConfiguration && (
-                                <Typography fontSize={16} fontWeight={800} pl={'1ch'} sx={{backgroundColor: 'black'}}>
-                                    {project.artistName}
+                                <Typography fontSize={14} fontWeight={800} pl={'1ch'} sx={{backgroundColor: 'black'}}>
+                                    { `${project.pricePerTokenInWei.toString()}eth` }
                                 </Typography>
                             )
                         }
                     </Box>
                 </Box>
-                <Box>
-                    <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>  
-                        <Box sx={{display: 'inline-flex', gap: '4px'}}> 
-                            <Typography fontSize={16} fontWeight={800} pr={'1ch'} sx={{backgroundColor: 'black'}}>
-                                <span>{project.invocations.toString()}/{project.maxInvocations.toString()}</span>
-                            </Typography> 
-                            <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
-                        </Box>
-                        <JohnBox isContainer={true} onClick={() => window.location.href = `/project/${project.contract.id}/${project.projectId}`}>
-                            <Typography fontSize={16} fontWeight={800}>
-                                    launch
-                            </Typography>
-                        </JohnBox>
-                    </Box>
-                </Box>
+
             </Box>
             <TokenView
                 contractAddress={project.contract.id}
@@ -82,6 +68,19 @@ const ProjectPreview = ({project, width=280, showDescription=false}: Props) => {
                     </Box>
                 )
             }
+            <Box>
+                <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom:"30px"}}>  
+                    <Box sx={{display: 'inline-flex', gap: '4px'}}> 
+                        <Typography fontSize={14} fontWeight={800} pr={'4px'} sx={{backgroundColor: 'black'}}>
+                            <span>({project.invocations.toString()}/{project.maxInvocations.toString()})</span>
+                        </Typography> 
+                        <JohnDotsPercentage percentage={Number(project.invocations)/Number(project.maxInvocations)} />
+                    </Box>
+                    <JohnBox isContainer={false} onClick={() => window.location.href = `/project/${project.contract.id}/${project.projectId}`}>
+                        mint
+                    </JohnBox>
+                </Box>
+            </Box>
         </Box>
     )
 }

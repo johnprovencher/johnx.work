@@ -43,7 +43,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
                             display: 'inline-flex',
                             flexDirection: 'column',
                             justifyContent: 'center',
-                            gap: '3px',
+                            gap: '1.5px',
                         }}
                     >
                         {column}
@@ -56,7 +56,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
                     sx={{
                         position: 'relative',
                         display: 'inline-flex',
-                        gap: '3px',
+                        gap: '2px',
                     }}
                 >
                     {row}
@@ -67,7 +67,7 @@ const JohnDotsPercentage = ({ percentage }: DotPercentageGroupProps) => {
     };
 
     return (
-        <Box sx={{ position: 'relative', display: 'inline-flex', gap: '6px' }}>
+        <Box sx={{ position: 'relative', display: 'inline-flex', gap: '4px' }}>
             {generateDots()}
         </Box>
     );

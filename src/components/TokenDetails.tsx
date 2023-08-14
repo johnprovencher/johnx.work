@@ -121,7 +121,7 @@ const TokenDetails = ({ contractAddress, id }: Props) => {
                     </Box>
                 </Grid>
                 <Grid item md={4}>
-                    <Typography fontSize="16px" mb={4}>
+                    <Typography fontSize="14px" mb={4}>
                         Minted {moment.unix(token.createdAt).format("LL")}
                     </Typography>
                     <Typography variant="h1">

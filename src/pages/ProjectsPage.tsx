@@ -16,8 +16,8 @@ const ProjectsPage = () => {
                         <JohnBox> 
                             {
                                 isSmallScreen
-                                    ? 'welcome to johnx.work'
-                                    : 'welcome to johnx.work, a home for on-chain generative art by john provencher...'
+                                    ? 'welcome'
+                                    : 'welcome'
                             }
                         </JohnBox>
                     )
