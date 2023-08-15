@@ -55,6 +55,7 @@ const MintingInterfaceFilter = (
             coreContractAddress={coreContractAddress}
             mintContractAddress={minterAddress}
             projectId={projectId}
+            projectTitle={projectId}
             artistAddress={artistAddress}
             scriptAspectRatio={scriptAspectRatio}
         />
