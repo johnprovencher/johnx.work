@@ -12,11 +12,12 @@ import { getContractConfigByAddress } from "utils/contractInfoHelper";
 interface Props {
   contractAddress: string
   tokenId: string
-  width: number
-  height: number
+  width: number,
+  height: number,
+  aspectRatio?: number
 }
 
-const TokenLive = ({contractAddress, tokenId, width, height}: Props) => {
+const TokenLive = ({contractAddress, tokenId, aspectRatio}: Props) => {
     const [status, setStatus] = useState(404)
     const [pollingTime, setPollingTime] = useState(0)
     const [pollingDelay, setPollingDelay] = useState(0)
@@ -47,27 +48,29 @@ const TokenLive = ({contractAddress, tokenId, width, height}: Props) => {
     }, 1000*pollingDelay)
 
     if (pollingAttempts === 0) {
+        console.log('polling attemps 0, returning empty box')
         return (
-            <Box width={String(width)+"px"} height={String(height)+"px"}></Box>
+            <Box width={String(0)+"px"} height={String(0)+"px"}></Box>
         )
     }
 
     if (pollingTime > 500) {
+        console.log('returning image instead of iframe!')
         return (
             <TokenImage contractAddress={contractAddress} tokenId={tokenId} />
         )
     }
 
     return (
-        <Box>
+        <Box sx={{ height: '100%', position: 'relative' }}>
             {
                 status === 200 ?
                     (
                         <iframe
                             title={tokenId}
                             src={endpoint}
-                            width={String(width)+"px"}
-                            height={String(height)+"px"}
+                            width={String(100)+"%"}
+                            height={String(100)+"%"}
                             frameBorder={"0"}
                         />
                     ) :
@@ -76,8 +79,8 @@ const TokenLive = ({contractAddress, tokenId, width, height}: Props) => {
                             display="flex"
                             alignItems="center"
                             justifyContent="center"
-                            width={String(width)+"px"}
-                            height={String(height)+"px"}
+                            width={String(100)+"%"}
+                            height={String(100)+"%"}
                         >
                             <Box>
                                 <Loading/>

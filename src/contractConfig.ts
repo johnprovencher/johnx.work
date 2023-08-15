@@ -19,7 +19,7 @@ export const testnetContractConfig = [
         "MINT_CONTRACT_ADDRESS": MINT_CONTRACT,
         "MEDIA_URL": `https://media-proxy-staging.artblocks.io/${CORE_CONTRACT}`,
         "TOKEN_URL": `https://token.staging.artblocks.io`,
-        "GENERATOR_URL": `https://generator-staging-goerli.artblocks.io/${CORE_CONTRACT}`,
+        "GENERATOR_URL": `https://generator-staging-goerli.artblocks.io`,
         "EDIT_PROJECT_URL": `https://artist-staging.artblocks.io/engine/flex/projects/${CORE_CONTRACT}`
     }
 ]

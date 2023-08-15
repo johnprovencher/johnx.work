@@ -32,7 +32,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     const { loading, error, data, refetch } = useProject(`${contractAddress}-${id}`)
     const project = data?.project
     const contractConfig = getContractConfigByAddress(contractAddress)
-    const projectIsLive = false
+    const showLiveToken = true
 
     const { dataArray: traitsdataArray } = useTokenTraitsBatch(contractAddress, project.tokens)
     const [selectedToken, setSelectedToken] = useState<null| any>(null)
@@ -109,10 +109,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     return project && contractConfig && (
         <Box sx={{px: '24px', maxWidth:'10400px', margin: '0 auto'}}>
-            <Box sx={{width: `${project.aspectRatio * 100}vh`, margin:'auto', paddingBottom: '4em'}}>
+            <Box sx={{width: `${project.aspectRatio * 100}vh`, height: '100vh', margin:'auto', paddingBottom: '4em'}}>
                 {
                     project.tokens && (
-                        projectIsLive ?
+                        showLiveToken ?
                             (
                                 <TokenLive contractAddress={contractAddress} tokenId={project.tokens[0].tokenId} width={300} height={300} />
                             ) :

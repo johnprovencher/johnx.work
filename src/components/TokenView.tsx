@@ -29,7 +29,7 @@ const TokenView = ({
                 {
                     live ?
                         (
-                            <TokenLive contractAddress={contractAddress} tokenId={tokenId} width={300} height={300} />
+                            <TokenLive contractAddress={contractAddress} tokenId={tokenId} aspectRatio={aspectRatio} width={300} height={300} />
                         ) :
                         (
                             <TokenImage contractAddress={contractAddress} tokenId={tokenId} aspectRatio={aspectRatio} />
