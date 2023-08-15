@@ -21,6 +21,7 @@ import MintingInterfaceFilter from "./MintingInterfaceFilter"
 import MinterSetPriceV4Interface from "./MinterInterfaces/MinterSetPriceV4Interface"
 import { useAccount } from "wagmi"
 import Connect from "./Connect"
+import { useWindowSize } from "usehooks-ts"
 
 interface Props {
   contractAddress: string
@@ -33,6 +34,8 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
     const project = data?.project
     const contractConfig = getContractConfigByAddress(contractAddress)
     const showLiveToken = true
+
+    const { width } = useWindowSize()
 
     const { dataArray: traitsdataArray } = useTokenTraitsBatch(contractAddress, project.tokens)
     const [selectedToken, setSelectedToken] = useState<null| any>(null)
@@ -243,56 +246,111 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                             <ProjectMetadataRow key={idx} tokenData={tokenData} />
                         ))
                     }
-                </Box>
-                <Box sx={{ position: 'relative', width: '100%', height: '100%'}}>
-                    <Box sx={{ position: 'sticky', width: '100%', top: 0, display: 'inline-flex', flexDirection: 'column', gap: '1em', paddingTop: '5px'}}>
-                        <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
-                            <JohnDotsLine />
-                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
-                                <Typography sx={{position: 'relative', backgroundColor: 'black', paddingRight:"6px" }}> item number </Typography>
-                            </Box>
-                            <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white', paddingLeft:"6px"}}>
-                                {
-                                    selectedToken && (
-                                        <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
-                                    )
-                                }
-                            </Box>
-                        </Box>
-                        <Box sx={{width: '100%', px: '0'}}>
-                            {
-                                selectedToken && (
-                                    <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
-                                )
-                            }
-                        </Box>
-                        <Box sx={{ display: 'inline-flex', gap:'10px', padding: '10px 0px 8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
-                            <JohnBox onClick={() => window.location.href="www.google.com" }>
-                                fullscreen
-                            </JohnBox>
-                            <JohnBox onClick={ () =>
-                                window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
-                            }>
-                                opensea
-                            </JohnBox>
-                        </Box>
-                        <Box sx={{paddingBottom:'14px',}}>
-                            {
-                                selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
-                                    <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', justifyContent: 'space-between' }}>
+                    {
+                        width < 862 && (
+                            <Box sx={{ position: 'sticky', width: '100%', bottom: 0, left: 0, right: 0, display: 'flex', flexDirection: 'row', gap: '1em', backgroundColor: 'black'}}>
+                                <Box sx={{ position: 'relative', paddingTop:'2em', display: 'flex', width: '50%', gap: '2em', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <Box sx={{ position: 'relative' }}>
                                         <JohnDotsLine />
-                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingRight: "6px"}}>
-                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
-                                        </Box>
-                                        <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingLeft: "6px"}}>
-                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
+                                        <Box sx={{display: 'flex', position: 'relative', justifyContent: 'space-between'}}>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>item number</Typography>
+                                            {
+                                                selectedToken && (
+                                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
+                                                )
+                                            }
                                         </Box>
                                     </Box>
-                                ))
-                            }
-                        </Box>
-                    </Box>
+                                    <Box sx={{width: `100%`, height: '100%'}}>
+                                        {
+                                            selectedToken && (
+                                                <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                                            )
+                                        }
+                                    </Box>
+                                    <Box sx={{ display: 'inline-flex', gap:'10px', padding: '10px 0px 8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
+                                        <JohnBox onClick={() => window.location.href="www.google.com" }>
+                                            fullscreen
+                                        </JohnBox>
+                                        <JohnBox onClick={ () =>
+                                            window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
+                                        }>
+                                            opensea
+                                        </JohnBox>
+                                    </Box>
+                                </Box>
+                                <Box sx={{ paddingTop:'2em', position: 'relative', display: 'flex', flexDirection: 'column', width: '50%', height: '100%', gap: '3em', justifyContent: 'flex-start' }}>
+                                    {
+                                        selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
+                                            <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', justifyContent: 'space-between' }}>
+                                                <JohnDotsLine />
+                                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingRight: "6px"}}>
+                                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
+                                                </Box>
+                                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingLeft: "6px"}}>
+                                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
+                            </Box>
+                        )
+                    }
                 </Box>
+                {
+                    width >= 862 && (
+                        <Box sx={{ position: 'relative', width: '100%', height: '100%'}}>
+                            <Box sx={{ position: 'sticky', width: '100%', top: 0, display: 'inline-flex', flexDirection: 'column', gap: '1em', paddingTop: '5px'}}>
+                                <Box  sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', color: 'rgba(255,255,255,0.5)', justifyContent: 'space-between' }}>
+                                    <JohnDotsLine />
+                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black'}}>
+                                        <Typography sx={{position: 'relative', backgroundColor: 'black', paddingRight:"6px" }}> item number </Typography>
+                                    </Box>
+                                    <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', color:'white', paddingLeft:"6px"}}>
+                                        {
+                                            selectedToken && (
+                                                <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
+                                            )
+                                        }
+                                    </Box>
+                                </Box>
+                                <Box sx={{width: '100%', px: '0'}}>
+                                    {
+                                        selectedToken && (
+                                            <TokenImage contractAddress={project.contract.id} tokenId={selectedToken.tokenID} aspectRatio={project.aspectRatio || parseAspectRatio(project.scriptJSON)} />
+                                        )
+                                    }
+                                </Box>
+                                <Box sx={{ display: 'inline-flex', gap:'10px', padding: '10px 0px 8px', '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start' } }}>
+                                    <JohnBox onClick={() => window.location.href="www.google.com" }>
+                                        fullscreen
+                                    </JohnBox>
+                                    <JohnBox onClick={ () =>
+                                        window.open(`https://${isUsingTestnet() ? 'testnets.' : ''}opensea.io/assets/${isUsingTestnet() ? 'goerli' : 'ethereum'}/${selectedToken ? contractAddress?.toLowerCase() + '/' + selectedToken.tokenID : ''}`)
+                                    }>
+                                        opensea
+                                    </JohnBox>
+                                </Box>
+                                <Box sx={{paddingBottom:'14px',}}>
+                                    {
+                                        selectedToken && selectedToken?.traits.map((trait:Trait, idx:number) => (
+                                            <Box key={idx} sx={{ position: 'relative', display: 'flex', width: '100%', gap: '1em', justifyContent: 'space-between' }}>
+                                                <JohnDotsLine />
+                                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingRight: "6px"}}>
+                                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}> { trait.trait_type } </Typography>
+                                                </Box>
+                                                <Box sx={{display: 'inline-flex', position: 'relative', backgroundColor:'black', paddingLeft: "6px"}}>
+                                                    <Typography sx={{position: 'relative', backgroundColor: 'black' }}>{ trait.value } </Typography>
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
+                            </Box>
+                        </Box>
+                    )
+                }
             </Box>
             <Footer />
         </Box>
