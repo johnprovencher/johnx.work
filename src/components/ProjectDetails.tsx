@@ -112,7 +112,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
 
     return project && contractConfig && (
         <Box sx={{px: '24px', maxWidth:'10400px', margin: '0 auto'}}>
-            <Box sx={{width: `${project.aspectRatio * 100}vh`, height: '100vh', margin:'auto', paddingBottom: '4em'}}>
+            <Box sx={{width: `${project.aspectRatio * 100}vh`, maxWidth: '100%', height: '100vh', margin:'auto', paddingBottom: '4em'}}>
                 {
                     project.tokens && (
                         showLiveToken ?
