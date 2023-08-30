@@ -135,7 +135,7 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         <Typography>title</Typography>
                         <Typography>release date</Typography>
                     </Box>
-                    <Box sx={{display: 'flex', gap: '4px', justifyContent: 'space-between', alignItems: "center"}}> 
+                    <Box sx={{display: 'flex', gap: '4px', justifyContent: 'space-between', alignItems: "center", flexDirection: 'row',  '@media screen and (max-width: 465px)': {flexDirection: 'column', alignItems: 'flex-start', gap: '1em'}}}> 
                         <Box sx={{display: 'inline-flex', gap: '4px'}}> 
                             <Typography fontSize={14} fontWeight={800} pr={'4px'} sx={{backgroundColor: 'black'}}>
                                 <span>({project.invocations.toString()}/{project.maxInvocations.toString()})</span>
