@@ -250,10 +250,10 @@ const ProjectDetails = ({ contractAddress, id }: Props) => {
                         width < 862 && (
                             <Box sx={{ position: 'sticky', width: '100%', bottom: 0, left: 0, right: 0, display: 'flex', flexDirection: 'row', gap: '1em', backgroundColor: 'black'}}>
                                 <Box sx={{ position: 'relative', paddingTop:'2em', display: 'flex', width: '50%', gap: '2em', flexDirection: 'column', justifyContent: 'space-between' }}>
-                                    <Box sx={{ position: 'relative' }}>
+                                    <Box sx={{ position: 'relative', height: '100%'}}>
                                         <JohnDotsLine />
                                         <Box sx={{display: 'flex', position: 'relative', justifyContent: 'space-between'}}>
-                                            <Typography sx={{position: 'relative', backgroundColor: 'black' }}>item number</Typography>
+                                            <Typography sx={{position: 'relative', backgroundColor: 'black', height: '100%' }}>item number</Typography>
                                             {
                                                 selectedToken && (
                                                     <Typography sx={{position: 'relative', backgroundColor: 'black' }}> {selectedToken.tokenID} </Typography>
