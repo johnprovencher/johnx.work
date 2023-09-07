@@ -14,7 +14,7 @@ const TokenImage = ({contractAddress, tokenId, aspectRatio}: Props) => {
     return (
         <Box sx={{ height: '100%', position: 'relative' }}>
             <img
-                src={`${contractConfig?.MEDIA_URL}/${tokenId}.png`}
+                src={`${contractConfig?.MEDIA_URL}/thumb/${tokenId}.png`}
                 alt={tokenId}
                 width={'100%'}
                 height={'100%'}
